@@ -1,0 +1,64 @@
+C++
+Multithreading
+STL
+- Morning - Networking concepts
+
+Compile generates a so file along with .o and .d
+C++ Topics
+- C vs C++
+https://www.geeksforgeeks.org/difference-between-c-and-c/
+- Empty class [one byte to make them distinguishable.]
+class Thing {
+public:
+    Thing();                        // default constructor
+    Thing(const Thing&);            // copy c'tor
+    Thing& operator=(const Thing&); // copy-assign
+    ~Thing();                       // d'tor
+    // C++11:
+    Thing(Thing&&);                 // move c'tor
+    Thing& operator=(Thing&&);      // move-assign
+};
+- Structure in C vs C++
+- Memory management in C vs C++
+- Memory management in C++
+If i allocate using malloc can we delocate using delete
+- Class vs Structure
+- New vs Malloc
+- Null vs void ptr
+- Reference vs Pointer [ No reference in C]
+- OOPS Concepts
+- Abstraction vs Encapsulation
+- Diamond problem
+- Assignment operator
+- Operator overloading and why we overload
+- Function overloading
+- Early and late binding
+- Abstract Class
+- Virtual function and pure virtual function
+- Virtual function without inheritence - is it possible?
+- function pointer
+Done
+- Friend Class and Function
+- Constructor and types
+Why pass by refernce in copy and pass by value, what happens if we pass by value
+- Purpose of scope resolution operator
+- Destructor
+- templates
+- dangling pointer and how to avoid
+- Difference between delete and delete[]
+- There are 3 classes a, b and C, B from A and C from B, how to access private of A in C?
+- Memory storage of all variables
+- Copy Constructor - with string
+
+Both are compile time or runtime
+
+- Initializer list 
+- C++ 11 standards
+https://smartbear.com/blog/the-biggest-changes-in-c11-and-why-you-should-care/
+- C++ compiler version
+- Design patterns
+- Class A has 2 functions F1 and F2, F2 is virtual and inside F1 func body we are calling F2. We have created base class pointer which is pointing
+to derived class B, we are overiding F2
+- Smart pointers and types
+
+STL
