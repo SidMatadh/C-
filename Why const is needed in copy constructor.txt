@@ -1,0 +1,29 @@
+class ABC
+    {
+       public:
+           int a;
+           int b;
+           ABC()
+           {
+               a =5;
+               b =10;
+           }
+       ABC(ABC &other)
+       { 
+         a = other.a;
+         b = other.b;
+       }
+       ABC operator+(const ABC &other)
+       {
+           ABC res;
+           res.a = a + other.a;
+           res.b = b + other.b;
+           return res;
+       }
+    };
+    int main()
+    {
+        ABC a1;
+        ABC b1 = a1;
+        ABC b2 = b1+a1;
+    }

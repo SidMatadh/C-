@@ -1,0 +1,34 @@
+#include<iostream>
+#include <cstring>
+using namespace std;
+
+class example
+{
+  char *c;
+  int len;
+  public:
+  example(char *b)
+  {
+    len = strlen(b)+1;
+    c = new char(len);
+    c = strncpy(c, b, len);
+  }
+  example(const example &str)
+  {
+      len = str.len;
+      c = new char(len);
+      c = strncpy(c, str.c, len);
+  }
+  void display()
+  {
+      cout<<c;
+  }
+};
+
+int main()
+{
+    example s1("string1");
+    example s2=s1;
+    s2.display();
+    return 0;
+}
