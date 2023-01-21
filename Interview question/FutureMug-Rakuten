@@ -1,0 +1,16 @@
+Virtual constructor
+Design pattern
+purpose of smart pointers
+volatile variables
+When friend is used?
+dangling pointer
+nullptr vs null
+array vs vector
+types of map
+why do we overload opreators?
+what happens when we delete a pointer?
+deque
+prority inversion?
+why reference is needed in Copy constructor , can we modify it with value?
+namemangling?
+lambda expression usage and advantage?
