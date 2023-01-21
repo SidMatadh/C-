@@ -1,0 +1,61 @@
+Program to remove duplicate words
+Program to remove duplicate characters
+program to print unique words
+program to print unique characters
+
+1)Program to remove duplicate words
+
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void displayunique(vector<string> A1)
+{
+    sort(A1.begin(),A1.end());
+    vector<string> dup;
+    
+    for(int i=1;i<A1.size();i++)
+    {
+        if(A1[i-1] == A1[i])
+        {
+            if(dup.empty())
+            dup.push_back(A1[i]);
+            else if(A1[i] != dup.back())
+            dup.push_back(A1[i]);
+        }
+    }
+    for(int i=0;i<dup.size();i++)
+    cout<<dup[i]<<endl;
+}
+int main()
+{
+    vector<string> A1{"My", "Name", "My","Name"};
+    displayunique(A1);
+    return 0;
+}
+
+program to print unique characters
+
+int main()
+{
+    string str = "my name is hello and world";
+    map<char,int> M1;
+    for(int i=0;i<str.length();i++)
+    {
+       M1[str[i]]++; 
+    }
+    
+    for(auto i : M1)
+    {
+        if(i.second >1)
+        cout<<i.first<<"and"<<i.second<<endl;
+    }
+}
