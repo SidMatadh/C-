@@ -1,0 +1,7 @@
+C is a subset of C++
+C does not support OOPS
+C strucutre is different compare to C++
+C memory management includes malloc calloc but C++ has these along with new and delete
+C does not support function overloading
+Input output methods are different in both
+C does not support virtual, no constructors, object creation, data hiding etc
