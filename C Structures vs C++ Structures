@@ -1,0 +1,30 @@
+C Structures vs C++ Structures
+
+Only data members are allowed, it cannot have member functions.	Can hold both: member functions and data members.
+Cannot have static members.	Can have static members.
+Cannot have a constructor inside a structure.	Constructor creation is allowed.
+Direct Initialization of data members is not possible.	Direct Initialization of data members is possible.
+Writing the ‘struct’ keyword is necessary to declare structure-type variables.	Writing the ‘struct’ keyword is not necessary to declare structure-type variables.
+Do not have access modifiers.	Supports access modifiers.
+Only pointers to structs are allowed.	Can have both pointers and references to the struct.
+Data Hiding is not possible.	Data Hiding is possible.
+
+9th point
+struct MyStruct {
+  int data;
+};
+
+void do_something(MyStruct *s) {
+  s->data = 1;
+}
+
+void do_something_ref(MyStruct &s) {
+  s.data = 1;
+}
+
+int main() {
+  MyStruct s;
+  do_something(&s); // passing pointer to struct
+  do_something_ref(s); // passing reference to struct
+  return 0;
+}
