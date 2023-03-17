@@ -1,0 +1,26 @@
+int main()
+{
+    char str[] = "Hello Worldl";
+    int len = strlen(str);
+    int i, j, k;
+    printf("Duplicate elements in the string: ");
+    for (i = 0; i < len; i++) {
+        for (j = i + 1; j < len; j++) {
+            if (str[i] == str[j]) 
+            {
+                printf("%c ", str[i]);
+                for (k = j; k < len; k++) 
+                    str[k] = str[k + 1];
+               len--;
+                j--;
+            }
+        }
+    }
+    
+    printf("\nString after removing duplicates: %s", str);
+    
+    return 0;
+}
+
+Duplicate elements in the string: l l l o 
+String after removing duplicates: Helo Wrd
