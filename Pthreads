@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <pthread.h>
+
+int count = 1;
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+
+void* even(void *arg)
+{
+    while (count <= 10)
+    {
+        //pthread_mutex_lock(&mutex);
+        if(count%2 == 0)
+        {
+            printf("%d\n",count);
+            count++;
+            pthread_cond_signal(&cond); // signal the condition variable after printing each even number
+        }
+        else
+        {
+            pthread_cond_wait(&cond, &mutex); // wait for the condition variable to be signaled
+        }
+        //pthread_mutex_unlock(&mutex);
+    }
+    return NULL;
+}
+
+void* odd(void *arg)
+{
+    while (count <= 10)
+    {
+      //  pthread_mutex_lock(&mutex);
+        if(count%2 != 0)
+        {
+            printf("%d\n",count);
+            count++;
+            pthread_cond_signal(&cond); // signal the condition variable after printing each odd number
+        }
+        else
+        {
+            pthread_cond_wait(&cond, &mutex); // wait for the condition variable to be signaled
+        }
+      //  pthread_mutex_unlock(&mutex);
+    }
+    return NULL;
+}
+
+int main()
+{
+    pthread_t id,id1;
+    pthread_mutex_init(&mutex, NULL);
+    pthread_cond_init(&cond, NULL);
+    int val = 5;
+    pthread_create(&id, NULL, even, &val);
+    pthread_create(&id1, NULL, odd, &val);
+    pthread_join(id, NULL);
+    pthread_join(id1, NULL);
+    pthread_cond_signal(&cond); // signal the condition variable after both threads are done
+    pthread_mutex_destroy(&mutex);
+    pthread_cond_destroy(&cond);
+    pthread_exit(NULL);
+    return 0;
+}
