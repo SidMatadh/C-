@@ -67,3 +67,39 @@ int main() {
 
     return 0;
 }
+................
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[] = "MY NAME MY NAME Sid MY Sid";
+    char str1[50][50];
+    int n = 0, wordStart = 0, i, j, count = 0;
+    int len = strlen(str);
+
+    // Split the string into words
+    for (i = 0; i <= len; i++) {
+        if (str[i] == ' ' || str[i] == '\0') {
+            int wordEnd = i - 1;
+            int wordLen = wordEnd - wordStart + 1;
+            strncpy(str1[n], str + wordStart, wordLen);
+            str1[n][wordLen] = '\0';
+            n++;
+            wordStart = i + 1;
+        }
+    }
+        
+    
+
+    // Check for duplicate words
+    for (i = 0; i < n; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (strcmp(str1[i], str1[j]) == 0) {
+                printf("Duplicate word: %s\n", str1[i]);
+            }
+        }
+    }
+
+    return 0;
+}
