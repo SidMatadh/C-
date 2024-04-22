@@ -1,0 +1,106 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+typedef struct Node
+{
+    int data;
+    struct Node* next;
+} Node;
+
+Node* createNode(int data)
+{
+    Node* newnode = (Node*)malloc(sizeof(Node));
+    if(newnode == NULL)
+    cout<<"issue while allocating a new node";
+    
+    newnode->data = data;
+    newnode->next =  NULL;
+    return newnode;
+}
+
+void insertNodeAtBegining(Node **head, int data)
+{
+    Node *newnode = createNode(data);
+    newnode->next = *head;
+    *head = newnode;
+}
+
+void printNode(Node* head)
+{
+    Node *temp = head;
+    
+    while(temp != NULL)
+    {
+        cout<<temp-> data<<"->";
+        temp = temp->next; 
+    }
+    cout<< "NULL";
+}
+
+
+int main() {
+    // Write C++ code here
+    Node *head = NULL;
+    
+    insertNodeAtBegining(&head, 1);
+    insertNodeAtBegining(&head, 2);
+    insertNodeAtBegining(&head, 3);
+    printNode(head);
+    return 0;
+}
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a node in the linked list
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+// Function to create a new node with given data
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (newNode == NULL) {
+        printf("Error creating a new node.\n");
+        exit(0);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to insert a node at the beginning of the linked list
+Node* insertAtBeginning(Node* head, int data) {
+    Node* newNode = createNode(data);
+    newNode->next = head;  // Point new node to current head
+    return newNode;        // Update head to new node
+}
+
+// Function to print the linked list
+void printList(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    Node* head = NULL; // Start with an empty list
+
+    // Inserting values at the beginning
+    head = insertAtBeginning(head, 10);
+    head = insertAtBeginning(head, 20);
+    head = insertAtBeginning(head, 30);
+
+    // Print the current state of the linked list
+    printList(head);
+
+    return 0;
+}
