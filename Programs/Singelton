@@ -17,7 +17,13 @@ class Singleton {
       instance = new Singleton;
       return instance;
    }
-
+//Thread safe code
+/*
+    static Singleton* getInstance() {
+        static Singleton instance;  // Local static variable instantiation is thread-safe in C++11
+        return &instance;
+    }
+*/
    int getData() {
       return this -> data;
    }
