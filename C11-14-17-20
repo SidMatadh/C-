@@ -1,0 +1,43 @@
+C++11
+C++11 was a major update that introduced several game-changing features which made C++ both easier to use and more powerful. Some of the key features include:
+
+Auto: Automatic type deduction of variables.
+Range-based for loops: Simplified syntax for iterating over containers.
+Lambda expressions: Support for anonymous functions, which can capture variables from the surrounding context.
+Smart pointers: std::unique_ptr, std::shared_ptr, and std::weak_ptr for automatic and more reliable memory management.
+Move semantics: Introduced to optimize resource management, particularly in container classes, with move constructors and move assignment operators.
+Concurrency support: New memory model and concurrent execution features including threads, mutexes, and condition variables.
+nullptr: A type-safe null pointer constant.
+Uniform initialization: Unified syntax for initializing any object.
+
+C++14
+C++14 provided a refinement of C++11 features with several small but useful additions and improvements:
+
+Binary literals and digit separators: Improved code readability with binary literals and the ability to separate digits in numeric literals.
+Generic lambdas: Lambdas that use auto in parameter declarations.
+Return type deduction: Functions can omit the return type, which is deduced from the return statements.
+Relaxed constexpr restrictions: Allowing more complex computations at compile-time.
+Deprecated attribute: Indicating that a feature or function is deprecated.
+Simplified for loops further: Extended the capabilities of range-based for loops.
+
+C++17
+C++17 continued to improve the language usability and introduced features that simplified common programming tasks:
+
+Structured bindings: Allow unpacking tuple or struct into individual named variables.
+Inline variables: For defining variables in header files without multiple definition errors.
+If and switch with initializers: Adding an initializer to if and switch statements.
+std::optional: For representing optional values.
+std::variant and std::visit: For safe, generic, type-safe unions.
+Fold expressions: For variadic templates, allowing easy accumulation or other operations on all template arguments.
+Filesystem library: A portable way to interact with the file system.
+
+C++20
+C++20 is another major update, with features that aim to simplify the code and enhance the functionality further:
+
+Concepts: Providing a way to specify template requirements and improve compiler diagnostics.
+Ranges: Introduces a new way to work with sequences, inspired by functional programming.
+Coroutines: Support for coroutines, which allows for cooperative multitasking by pausing and resuming functions.
+Modules: Introducing a new way to organize and compile code that can replace or complement the traditional preprocessor-based include model.
+Three-way comparison operator (spaceship operator): Simplified comparison of objects.
+Constexpr dynamic allocation: Allows new and delete in constexpr functions.
+Feature test macros: Provide a standard way to check whether a C++ feature is available.
