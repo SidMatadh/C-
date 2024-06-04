@@ -1,0 +1,211 @@
+Double linked list
+
+Insertion Operations
+Write a function to insert a node at the front of a double linked list.
+Write a function to insert a node in the middle of a double linked list (given a position).
+Write a function to insert a node at the end of a double linked list.
+
+Deletion Operations
+Write a function to delete a node from the front of a double linked list.
+Write a function to delete a node from the middle of a double linked list (given a position).
+Write a function to delete a node from the end of a double linked list.
+
+#include <iostream>
+
+using namespace std;
+
+typedef struct Node
+{
+    int data;
+    struct Node *prev;
+    struct Node *next;
+} Node;
+
+Node* createNode(int data)
+{
+    Node *newnode = (Node*)malloc(sizeof(Node));
+    if(newnode == nullptr)
+        cout << "Failed to allocate";
+    
+    newnode->data = data;
+    newnode->prev = NULL;
+    newnode->next = NULL;
+    return newnode;
+}
+
+// Insertion at the front
+void insertAtFront(Node **head, int data)
+{
+    Node* newnode = createNode(data);
+    newnode->next = *head;
+    if (*head != NULL)
+        (*head)->prev = newnode;
+    *head = newnode;
+}
+
+// Insertion in the middle (given a position)
+void insertAtMiddle(Node **head, int data, int position)
+{
+    Node* newnode = createNode(data);
+    Node *temp = *head;
+
+    if (position == 0)
+    {
+        insertAtFront(head, data);
+        return;
+    }
+
+    for (int i = 0; temp != NULL && i < position - 1; i++)
+        temp = temp->next;
+
+    if (temp == NULL)
+    {
+        cout << "Position is out of range" << endl;
+        return;
+    }
+
+    newnode->next = temp->next;
+    newnode->prev = temp;
+
+    if (temp->next != NULL)
+        temp->next->prev = newnode;
+
+    temp->next = newnode;
+}
+
+// Insertion at the end
+void insertAtEnd(Node **head, int data)
+{
+    Node* newnode = createNode(data);
+    if (*head == NULL)
+    {
+        *head = newnode;
+        return;
+    }
+
+    Node *temp = *head;
+    while(temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newnode;
+    newnode->prev = temp;
+}
+
+// Deletion from the front
+void deleteFront(Node **head)
+{
+    if (*head == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    Node *temp = *head;
+    *head = (*head)->next;
+
+    if (*head != NULL)
+        (*head)->prev = NULL;
+
+    free(temp);
+}
+
+// Deletion from the middle (given a position)
+void deleteMiddle(Node **head, int position)
+{
+    if (*head == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    Node *temp = *head;
+
+    if (position == 0)
+    {
+        deleteFront(head);
+        return;
+    }
+
+    for (int i = 0; temp != NULL && i < position; i++)
+        temp = temp->next;
+
+    if (temp == NULL)
+    {
+        cout << "Position is out of range" << endl;
+        return;
+    }
+
+    if (temp->next != NULL)
+        temp->next->prev = temp->prev;
+
+    if (temp->prev != NULL)
+        temp->prev->next = temp->next;
+
+    free(temp);
+}
+
+// Deletion from the end
+void deleteEnd(Node **head)
+{
+    if (*head == NULL)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+
+    Node *temp = *head;
+
+    if (temp->next == NULL)
+    {
+        free(temp);
+        *head = NULL;
+        return;
+    }
+
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->prev->next = NULL;
+    free(temp);
+}
+
+// Function to print nodes in the double linked list
+void printList(Node *head)
+{
+    Node *temp = head;
+    while(temp != NULL)
+    {
+        cout << temp->data << " <-> ";
+        temp = temp->next;
+    }
+    cout << "NULL" << endl;
+}
+
+int main()
+{
+    Node *head = NULL;
+
+    insertAtFront(&head, 10);
+    insertAtFront(&head, 20);
+    insertAtFront(&head, 30);
+    insertAtEnd(&head, 40);
+    insertAtEnd(&head, 50);
+    insertAtMiddle(&head, 25, 2);
+
+    cout << "Original list: ";
+    printList(head);
+
+    deleteFront(&head);
+    cout << "After deleting front: ";
+    printList(head);
+
+    deleteMiddle(&head, 2); // delete node at position 2
+    cout << "After deleting middle (position 2): ";
+    printList(head);
+
+    deleteEnd(&head);
+    cout << "After deleting end: ";
+    printList(head);
+
+    return 0;
+}
