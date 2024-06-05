@@ -3,43 +3,35 @@
 using namespace std;
 
 class Singleton {
-   static Singleton *instance;
-   int data;
- 
-   // Private constructor so that no objects can be created.
-   Singleton() {
-      data = 0;
-   }
+private:
+    int data;
 
-   public:
-   static Singleton *getInstance() {
-      if (!instance)
-      instance = new Singleton;
-      return instance;
-   }
-//Thread safe code
-/*
+    // Private constructor so that no objects can be created directly.
+    Singleton() {
+        data = 0;
+    }
+
+public:
+    // Static method to provide access to the single instance
     static Singleton* getInstance() {
-        static Singleton instance;  // Local static variable instantiation is thread-safe in C++11
+        static Singleton instance;
         return &instance;
     }
-*/
-   int getData() {
-      return this -> data;
-   }
 
-   void setData(int data) {
-      this -> data = data;
-   }
+    int getData() const {
+        return data;
+    }
+
+    void setData(int data) {
+        this->data = data;
+    }
 };
 
-//Initialize pointer to zero so that it can be initialized in first call to getInstance
-Singleton *Singleton::instance = 0;
-
-int main(){
-   Singleton *s = s->getInstance();
-   cout << s->getData() << endl;
-   s->setData(100);
-   cout << s->getData() << endl;
-   return 0;
+int main() {
+    // Access the singleton instance
+    Singleton *s = Singleton::getInstance();
+    cout << s->getData() << endl;  // Should output 0
+    s->setData(100);
+    cout << s->getData() << endl;  // Should output 100
+    return 0;
 }
