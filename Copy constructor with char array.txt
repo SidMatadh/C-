@@ -2,33 +2,54 @@
 #include <cstring>
 using namespace std;
 
-class example
-{
-  char *c;
-  int len;
-  public:
-  example(char *b)
-  {
-    len = strlen(b)+1;
-    c = new char(len);
-    c = strncpy(c, b, len);
-  }
-  example(const example &str)
-  {
-      len = str.len;
-      c = new char(len);
-      c = strncpy(c, str.c, len);
-  }
-  void display()
-  {
-      cout<<c;
-  }
+class example {
+    char *c;
+    int len;
+
+public:
+    example(char *b) {
+        len = strlen(b) + 1;
+        c = new char[len];
+        strncpy(c, b, len);
+    }
+
+    // Copy constructor
+    example(const example &str) {
+        len = str.len;
+        c = new char[len];
+        strncpy(c, str.c, len);
+    }
+
+    // Copy assignment operator
+    example& operator=(const example &other) {
+        if (this != &other) { // Self-assignment check
+            delete[] c; // Deallocate existing resources
+            len = other.len;
+            c = new char[len];
+            strncpy(c, other.c, len);
+        }
+        return *this;
+    }
+
+    void display() {
+        cout << c;
+    }
+
+    // Destructor to release dynamically allocated memory
+    ~example() {
+        delete[] c;
+    }
 };
 
-int main()
-{
+int main() {
     example s1("string1");
-    example s2=s1;
+    example s2 = s1;
     s2.display();
+    
+    // Testing copy assignment operator
+    example s3("string2");
+    s3 = s1;
+    s3.display();
+
     return 0;
 }
