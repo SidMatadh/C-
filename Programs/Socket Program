@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+
+int main() {
+    // Create a socket
+    int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (serverSocket == -1) {
+        std::cerr << "Error: Unable to create socket\n";
+        return 1;
+    }
+
+    // Bind the socket to an IP address and port
+    sockaddr_in serverAddr;
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_addr.s_addr = INADDR_ANY; // Bind to any available interface
+    serverAddr.sin_port = htons(8080); // Use port 8080
+    if (bind(serverSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)) == -1) {
+        std::cerr << "Error: Bind failed\n";
+        close(serverSocket);
+        return 1;
+    }
+
+    // Listen for incoming connections
+    if (listen(serverSocket, 5) == -1) {
+        std::cerr << "Error: Listen failed\n";
+        close(serverSocket);
+        return 1;
+    }
+
+    std::cout << "Server listening on port 8080...\n";
+
+    // Accept incoming connections
+    sockaddr_in clientAddr;
+    socklen_t clientAddrSize = sizeof(clientAddr);
+    int clientSocket = accept(serverSocket, (sockaddr*)&clientAddr, &clientAddrSize);
+    if (clientSocket == -1) {
+        std::cerr << "Error: Accept failed\n";
+        close(serverSocket);
+        return 1;
+    }
+
+    std::cout << "Connection accepted from " << inet_ntoa(clientAddr.sin_addr) << ":" << ntohs(clientAddr.sin_port) << std::endl;
+
+    // Send welcome message
+    std::string welcomeMsg = "Welcome to the server!";
+    send(clientSocket, welcomeMsg.c_str(), welcomeMsg.length(), 0);
+
+    // Receive and echo messages from client
+    char buffer[1024];
+    while (true) {
+        int bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
+        if (bytesReceived <= 0) {
+            break;
+        }
+        buffer[bytesReceived] = '\0'; // Null-terminate the received data
+        std::cout << "Received from client: " << buffer << std::endl;
+        send(clientSocket, buffer, bytesReceived, 0); // Echo back to client
+    }
+
+    // Close sockets
+    close(clientSocket);
+    close(serverSocket);
+
+    return 0;
+}
