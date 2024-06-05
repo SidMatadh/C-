@@ -1,63 +1,42 @@
-#include <stdio.h>
-#include <pthread.h>
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
-int count = 1;
-pthread_mutex_t mutex;
-pthread_cond_t cond;
+std::mutex mtx;
+std::condition_variable cv;
+bool printOddFlag = true;
 
-void* even(void *arg)
-{
-    while (count <= 10)
-    {
-        //pthread_mutex_lock(&mutex);
-        if(count%2 == 0)
-        {
-            printf("%d\n",count);
-            count++;
-            pthread_cond_signal(&cond); // signal the condition variable after printing each even number
+void printEven() {
+    for (int i = 2; i <= 10; i += 2) {
+        std::unique_lock<std::mutex> lock(mtx);
+        while (printOddFlag) {
+            cv.wait(lock);
         }
-        else
-        {
-            pthread_cond_wait(&cond, &mutex); // wait for the condition variable to be signaled
-        }
-        //pthread_mutex_unlock(&mutex);
+        std::cout << i << std::endl;
+        printOddFlag = true;
+        cv.notify_all();
     }
-    return NULL;
 }
 
-void* odd(void *arg)
-{
-    while (count <= 10)
-    {
-      //  pthread_mutex_lock(&mutex);
-        if(count%2 != 0)
-        {
-            printf("%d\n",count);
-            count++;
-            pthread_cond_signal(&cond); // signal the condition variable after printing each odd number
+void printOdd() {
+    for (int i = 1; i <= 9; i += 2) {
+        std::unique_lock<std::mutex> lock(mtx);
+        while (!printOddFlag) {
+            cv.wait(lock);
         }
-        else
-        {
-            pthread_cond_wait(&cond, &mutex); // wait for the condition variable to be signaled
-        }
-      //  pthread_mutex_unlock(&mutex);
+        std::cout << i << std::endl;
+        printOddFlag = false;
+        cv.notify_all();
     }
-    return NULL;
 }
 
-int main()
-{
-    pthread_t id,id1;
-    pthread_mutex_init(&mutex, NULL);
-    pthread_cond_init(&cond, NULL);
-    int val = 5;
-    pthread_create(&id, NULL, even, &val);
-    pthread_create(&id1, NULL, odd, &val);
-    pthread_join(id, NULL);
-    pthread_join(id1, NULL);
-    pthread_cond_signal(&cond); // signal the condition variable after both threads are done
-    pthread_mutex_destroy(&mutex);
-    pthread_cond_destroy(&cond);
-    pthread_exit(NULL);
+int main() {
+    std::thread thread1(printEven);
+    std::thread thread2(printOdd);
+
+    thread1.join();
+    thread2.join();
+
     return 0;
 }
