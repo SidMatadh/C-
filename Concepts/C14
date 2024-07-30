@@ -1,0 +1,109 @@
+Here are the key features and enhancements introduced in **C++14**:
+
+### **C++14 Features**
+
+1. **Binary Literals**
+   - **Description**: Allows literals to be specified in binary form.
+   - **Example**:
+     ```cpp
+     int bin = 0b1010; // binary for 10
+     ```
+
+2. **Generic Lambdas**
+   - **Description**: Enables lambda expressions to use `auto` for parameter types, making them more generic.
+   - **Example**:
+     ```cpp
+     auto add = [](auto a, auto b) { return a + b; };
+     ```
+
+3. **Return Type Deduction**
+   - **Description**: Allows functions to deduce their return type automatically using the `auto` keyword.
+   - **Example**:
+     ```cpp
+     auto add(int a, int b) {
+         return a + b; // return type is deduced as int
+     }
+     ```
+
+4. **decltype(auto)**
+   - **Description**: Combines `decltype` and `auto` for more precise type deduction.
+   - **Example**:
+     ```cpp
+     int x = 10;
+     decltype(auto) y = (x); // y is of type int&
+     ```
+
+5. **Relaxed constexpr Restrictions**
+   - **Description**: Allows more complex expressions in `constexpr` functions, including local variables and conditionals.
+   - **Example**:
+     ```cpp
+     constexpr int factorial(int n) {
+         return (n <= 1) ? 1 : (n * factorial(n - 1));
+     }
+     ```
+
+6. **std::make_unique**
+   - **Description**: Introduces `std::make_unique` to create `std::unique_ptr` objects.
+   - **Example**:
+     ```cpp
+     auto ptr = std::make_unique<int>(10);
+     ```
+
+7. **Enhanced User-Defined Literals**
+   - **Description**: Allows user-defined literals for more flexible literal extensions.
+   - **Example**:
+     ```cpp
+     constexpr long double operator"" _km(long double km) {
+         return km * 1000;
+     }
+
+     long double distance = 5.0_km; // 5000.0
+     ```
+
+8. **std::shared_timed_mutex**
+   - **Description**: Provides a new mutex type that supports both exclusive and shared locking.
+   - **Example**:
+     ```cpp
+     #include <shared_mutex>
+
+     std::shared_timed_mutex mtx;
+     ```
+
+9. **Extended constexpr Functions**
+   - **Description**: Allows `constexpr` functions to include more features, such as local variables and loops.
+   - **Example**:
+     ```cpp
+     constexpr int square(int n) {
+         int result = n * n;
+         return result;
+     }
+     ```
+
+10. **Deprecated Features**
+    - **Description**: Marks certain features as deprecated to encourage modern practices.
+    - **Example**: Use of certain unsafe functions.
+
+11. **std::integer_sequence and std::index_sequence**
+    - **Description**: Provides helper types for handling sequences of integers at compile-time.
+    - **Example**:
+      ```cpp
+      template<std::size_t... I>
+      void print(std::index_sequence<I...>) {
+          ((std::cout << I << ' '), ...);
+      }
+      ```
+
+12. **std::align and std::aligned_storage**
+    - **Description**: Provides utilities for alignment in dynamic memory allocation.
+    - **Example**:
+      ```cpp
+      #include <cstdlib>
+      #include <new>
+
+      void* ptr = std::align(alignof(int), sizeof(int), buffer, size);
+      ```
+
+13. **Improved type traits**
+    - **Description**: Enhancements to `std::is_base_of`, `std::is_convertible`, and other type traits utilities.
+
+These features improve the expressiveness, safety, and performance of C++ code, making C++14 a more powerful and user-friendly standard.
