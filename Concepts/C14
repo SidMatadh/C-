@@ -1,5 +1,18 @@
 Here are the key features and enhancements introduced in **C++14**:
 
+BRIGHT IDEAS
+B - Binary Literals
+R - Return Type Deduction
+I - decltype(auto) / Improved type traits
+G - Generic Lambdas
+H - (Relaxed constexpr Restrictions, as there's no 'H' feature, this letter serves as a bridge)
+T - std::shared_timed_mutex (shared mutex, threading concept)
+I - std::integer_sequence and std::index_sequence
+D - Deprecated Features
+E - Enhanced User-Defined Literals
+A - Align and Aligned_storage
+S - std::make_unique (smart pointers, safety)
+
 ### **C++14 Features**
 
 1. **Binary Literals**
@@ -69,21 +82,11 @@ Here are the key features and enhancements introduced in **C++14**:
      std::shared_timed_mutex mtx;
      ```
 
-9. **Extended constexpr Functions**
-   - **Description**: Allows `constexpr` functions to include more features, such as local variables and loops.
-   - **Example**:
-     ```cpp
-     constexpr int square(int n) {
-         int result = n * n;
-         return result;
-     }
-     ```
-
-10. **Deprecated Features**
+9. **Deprecated Features**
     - **Description**: Marks certain features as deprecated to encourage modern practices.
     - **Example**: Use of certain unsafe functions.
 
-11. **std::integer_sequence and std::index_sequence**
+10. **std::integer_sequence and std::index_sequence**
     - **Description**: Provides helper types for handling sequences of integers at compile-time.
     - **Example**:
       ```cpp
@@ -93,7 +96,7 @@ Here are the key features and enhancements introduced in **C++14**:
       }
       ```
 
-12. **std::align and std::aligned_storage**
+11. **std::align and std::aligned_storage**
     - **Description**: Provides utilities for alignment in dynamic memory allocation.
     - **Example**:
       ```cpp
@@ -102,8 +105,5 @@ Here are the key features and enhancements introduced in **C++14**:
 
       void* ptr = std::align(alignof(int), sizeof(int), buffer, size);
       ```
-
-13. **Improved type traits**
-    - **Description**: Enhancements to `std::is_base_of`, `std::is_convertible`, and other type traits utilities.
 
 These features improve the expressiveness, safety, and performance of C++ code, making C++14 a more powerful and user-friendly standard.
