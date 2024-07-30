@@ -1,0 +1,58 @@
+C++ has evolved through several standards, each introducing new features and improvements. Here’s a high-level overview of the major standards:
+
+### **C++98**
+- **First Standard**: This was the first standardized version of C++.
+- **Key Features**: Included basic syntax and features inherited from C++'s early development stages.
+
+### **C++03**
+- **Bug Fixes and Minor Improvements**: Primarily a bug fix release to correct issues in C++98 without introducing new features.
+
+### **C++11**
+- **Major Update**: Introduced several new features and enhancements to improve performance, usability, and maintainability.
+- **Key Features**:
+  - **Auto Keyword**: Type inference for variables.
+  - **Lambda Expressions**: Anonymous functions.
+  - **Smart Pointers**: `std::unique_ptr`, `std::shared_ptr`.
+  - **Move Semantics**: `std::move` and move constructors.
+  - **Concurrency Support**: Threads, mutexes, and locks.
+  - **Uniform Initialization**: Curly braces for initialization.
+  - **Range-Based for Loops**: Simplified iteration over containers.
+  - **New Standard Libraries**: `std::array`, `std::unordered_map`, `std::chrono`.
+
+### **C++14**
+- **Minor Improvements**: Added features and small improvements over C++11.
+- **Key Features**:
+  - **Binary Literals**: Integer literals in binary form.
+  - **Generic Lambdas**: Lambda expressions that use auto for parameters.
+  - **decltype(auto)**: More precise type deduction.
+  - **Return Type Deduction**: Functions can deduce their return type.
+
+### **C++17**
+- **Further Enhancements**: Introduced more significant features and optimizations.
+- **Key Features**:
+  - **Structured Bindings**: Decompose tuples or pairs into individual variables.
+  - **If constexpr**: Compile-time conditional code.
+  - **std::optional**: Represents an optional value.
+  - **std::variant**: Type-safe union.
+  - **Parallel Algorithms**: Standard library algorithms with parallel execution policies.
+  - **String View**: `std::string_view` for non-owning views of strings.
+
+### **C++20**
+- **Major Update**: Brought substantial changes and new features.
+- **Key Features**:
+  - **Concepts**: Type constraints in templates.
+  - **Ranges Library**: Composable range-based operations.
+  - **Coroutines**: Support for asynchronous programming.
+  - **Calendar and Time Zone Library**: `std::chrono` enhancements for date and time.
+  - **Modules**: New way to organize and import code, aiming to improve compilation times and code modularity.
+  - **Three-Way Comparison**: `<=>` operator for generalized comparisons.
+
+### **C++23**
+- **Ongoing Evolution**: Continued improvements and new features.
+- **Key Features**:
+  - **std::expected**: Represents an expected result or error.
+  - **std::utime**: Extended time handling features.
+  - **Improved Library Features**: Enhancements to standard libraries, including more powerful algorithms and utilities.
+  - **constexpr Enhancements**: Expanded capabilities for compile-time evaluation.
+
+Each standard builds on the previous ones, improving the language while maintaining backward compatibility where possible.
