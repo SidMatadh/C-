@@ -1,0 +1,121 @@
+**C++17** introduced several new features and enhancements over C++14. Here’s a detailed list of the key features:
+
+### **C++17 Features**
+
+1. **Structured Bindings**
+   - **Description**: Allows decomposing tuples, pairs, or custom types into individual named variables.
+   - **Example**:
+     ```cpp
+     std::tuple<int, double, std::string> getData();
+     auto [i, d, s] = getData();
+     ```
+
+2. **If constexpr**
+   - **Description**: Conditional compilation based on compile-time constants, enabling more flexible template code.
+   - **Example**:
+     ```cpp
+     template <typename T>
+     void printType() {
+         if constexpr (std::is_integral<T>::value) {
+             std::cout << "Integral type\n";
+         } else {
+             std::cout << "Non-integral type\n";
+         }
+     }
+     ```
+
+3. **std::optional**
+   - **Description**: Represents an optional value that may or may not be present.
+   - **Example**:
+     ```cpp
+     std::optional<int> maybeValue = 42;
+     if (maybeValue) {
+         std::cout << *maybeValue;
+     }
+     ```
+
+4. **std::variant**
+   - **Description**: A type-safe union that can hold one of several types.
+   - **Example**:
+     ```cpp
+     std::variant<int, double, std::string> v;
+     v = 10;
+     std::visit([](auto&& arg) { std::cout << arg; }, v);
+     ```
+
+5. **std::string_view**
+   - **Description**: A lightweight, non-owning view of a string, useful for efficiently passing strings.
+   - **Example**:
+     ```cpp
+     std::string_view sv = "Hello, World!";
+     std::cout << sv.substr(0, 5); // Output: Hello
+     ```
+
+6. **Parallel Algorithms**
+   - **Description**: Adds parallel execution policies to standard algorithms for better performance on multi-core processors.
+   - **Example**:
+     ```cpp
+     #include <algorithm>
+     #include <execution>
+     std::vector<int> v = {1, 2, 3, 4, 5};
+     std::for_each(std::execution::par, v.begin(), v.end(), [](int& n) { n *= 2; });
+     ```
+
+7. **std::filesystem**
+   - **Description**: Provides a standard way to work with file systems and paths.
+   - **Example**:
+     ```cpp
+     #include <filesystem>
+     namespace fs = std::filesystem;
+     
+     fs::path p = "example.txt";
+     if (fs::exists(p)) {
+         std::cout << "File exists.\n";
+     }
+     ```
+
+8. **std::clamp**
+   - **Description**: Clamps a value to a specified range.
+   - **Example**:
+     ```cpp
+     int x = 10;
+     int clamped = std::clamp(x, 0, 5); // clamped is 5
+     ```
+
+9. **std::byte**
+   - **Description**: Provides a distinct type for byte-level operations, improving type safety.
+   - **Example**:
+     ```cpp
+     std::byte b = std::byte{0x42};
+     ```
+
+10. **constexpr Enhancements**
+    - **Description**: Expands the capabilities of `constexpr` functions, allowing more complex expressions and use of dynamic memory.
+    - **Example**:
+      ```cpp
+      constexpr int factorial(int n) {
+          return (n <= 1) ? 1 : (n * factorial(n - 1));
+      }
+      ```
+
+11. **Inline Variables**
+    - **Description**: Allows defining variables in header files with `inline`, avoiding multiple definition errors.
+    - **Example**:
+      ```cpp
+      inline int globalValue = 42;
+      ```
+
+12. **Fold Expressions**
+    - **Description**: Provides a simpler syntax for writing variadic templates using binary operators.
+    - **Example**:
+      ```cpp
+      template<typename... Args>
+      auto sum(Args... args) {
+          return (args + ...);
+      }
+      ```
+
+13. **New Standard Library Features**
+    - **Description**: Various improvements to existing standard library components, including new functions and algorithms.
+
+These features collectively enhance the C++ programming language by improving performance, usability, and flexibility in modern C++ code.
