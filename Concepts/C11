@@ -1,5 +1,26 @@
 Here's a detailed list of key features introduced in **C++11**, including initializer lists and others:
 
+DATA LIMITS AT STAR
+
+D - Dynamic Cast Enhancements
+A - Atomic Operations
+T - Thread Support
+A - Auto Keyword
+L - Lambda Expressions
+I - Initializer Lists
+M - Move Semantics
+I - Inline Namespaces
+T - Type Traits
+S - Smart Pointers
+A - Anonymous Structures and Unions
+T - Thread-Local Storage
+S - Static Assertions
+T - Type Generic Programming
+A - Uniform Initialization
+R - Range-Based for Loop
+
+
+
 ### **C++11 Features**
 
 1. **Auto Keyword**
@@ -138,5 +159,16 @@ Here's a detailed list of key features introduced in **C++11**, including initia
       ```cpp
       __thread int my_tls_var;
       ```
+
+16.Inline Namespaces
+namespace MyLib {
+    inline namespace v1 {
+        void func() { /* Implementation */ }
+    }
+
+    namespace v2 {
+        void func() { /* Different implementation */ }
+    }
+}
 
 These features greatly enhance the C++ programming experience by improving performance, ease of use, and flexibility.
