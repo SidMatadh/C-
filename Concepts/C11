@@ -1,0 +1,142 @@
+Here's a detailed list of key features introduced in **C++11**, including initializer lists and others:
+
+### **C++11 Features**
+
+1. **Auto Keyword**
+   - **Description**: Automatically deduces the type of a variable from its initializer.
+   - **Example**:
+     ```cpp
+     auto x = 10; // x is int
+     ```
+
+2. **Lambda Expressions**
+   - **Description**: Defines anonymous functions inline with capture lists.
+   - **Example**:
+     ```cpp
+     auto add = [](int a, int b) { return a + b; };
+     ```
+
+3. **Smart Pointers**
+   - **Description**: Introduces `std::unique_ptr`, `std::shared_ptr`, and `std::weak_ptr` for automatic memory management.
+   - **Example**:
+     ```cpp
+     std::unique_ptr<int> ptr = std::make_unique<int>(10);
+     ```
+
+4. **Move Semantics**
+   - **Description**: Adds `std::move`, move constructors, and move assignment operators to optimize resource management.
+   - **Example**:
+     ```cpp
+     std::vector<int> vec1 = {1, 2, 3};
+     std::vector<int> vec2 = std::move(vec1);
+     ```
+
+5. **Range-Based for Loop**
+   - **Description**: Simplifies iteration over containers.
+   - **Example**:
+     ```cpp
+     for (auto &elem : container) {
+         // use elem
+     }
+     ```
+
+6. **Initializer Lists**
+   - **Description**: Provides a uniform way to initialize containers and arrays.
+   - **Example**:
+     ```cpp
+     std::vector<int> vec = {1, 2, 3};
+     ```
+
+7. **Type Traits**
+   - **Description**: Adds type traits to query and manipulate types at compile time.
+   - **Example**:
+     ```cpp
+     std::is_integral<int>::value; // true
+     ```
+
+8. **Static Assertions**
+   - **Description**: Allows compile-time assertions using `_Static_assert`.
+   - **Example**:
+     ```cpp
+     _Static_assert(sizeof(int) == 4, "int must be 4 bytes");
+     ```
+
+9. **Thread Support**
+   - **Description**: Adds `<thread>` for managing threads, mutexes, and other synchronization primitives.
+   - **Example**:
+     ```cpp
+     #include <thread>
+     
+     void worker() {
+         // Thread work
+     }
+     
+     int main() {
+         std::thread t(worker);
+         t.join();
+         return 0;
+     }
+     ```
+
+10. **Atomic Operations**
+    - **Description**: Introduces `<stdatomic.h>` for atomic operations and variables.
+    - **Example**:
+      ```cpp
+      #include <atomic>
+      
+      std::atomic<int> counter = 0;
+      counter.fetch_add(1);
+      ```
+
+11. **Dynamic Cast Enhancements**
+    - **Description**: Enhances `dynamic_cast` for safe downcasting with RTTI (Run-Time Type Information).
+    - **Example**:
+      ```cpp
+      class Base { virtual ~Base() {} };
+      class Derived : public Base { };
+      
+      Base* base = new Derived();
+      Derived* derived = dynamic_cast<Derived*>(base);
+      ```
+
+12. **Uniform Initialization**
+    - **Description**: Uses curly braces `{}` for initialization.
+    - **Example**:
+      ```cpp
+      int x{5}; // initializes x to 5
+      ```
+
+13. **Type Generic Programming**
+    - **Description**: Introduces `_Generic` for type-generic programming.
+    - **Example**:
+      ```cpp
+      #define print(x) _Generic((x), \
+          int: printf("int: %d\n", x), \
+          float: printf("float: %f\n", x), \
+          default: printf("other\n")) 
+
+      print(10);    // Output: int: 10
+      print(3.14f); // Output: float: 3.140000
+      ```
+
+14. **Anonymous Structures and Unions**
+    - **Description**: Allows unnamed structures and unions inside other structures or unions.
+    - **Example**:
+      ```cpp
+      struct {
+          int x;
+          union {
+              float y;
+              int z;
+          };
+      } example;
+      ```
+
+15. **Thread-Local Storage**
+    - **Description**: Uses `__thread` to specify thread-local storage.
+    - **Example**:
+      ```cpp
+      __thread int my_tls_var;
+      ```
+
+These features greatly enhance the C++ programming experience by improving performance, ease of use, and flexibility.
