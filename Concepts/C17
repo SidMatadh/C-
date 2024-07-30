@@ -1,5 +1,23 @@
 **C++17** introduced several new features and enhancements over C++14. Here’s a detailed list of the key features:
 
+"SIMPLE STUFF TO CLAMP"
+
+Here’s the mapping:
+
+S - Structured Bindings
+I - If constexpr
+M - std::optional
+P - std::variant
+L - std::string_view
+E - Parallel Algorithms (Enhanced)
+S - std::filesystem
+T - std::clamp
+T - std::byte
+O - constexpr Enhancements
+C - Inline Variables
+L - Fold Expressions
+A - New Standard Library Features
+
 ### **C++17 Features**
 
 1. **Structured Bindings**
