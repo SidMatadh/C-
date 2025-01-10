@@ -1,6 +1,5 @@
 Imagine you have a factory with two types of workers: producers and consumers. The producers create products and place them on a conveyor belt (a shared resource), while the consumers take products from the belt and use them. The challenge is to ensure that producers don't add products when the belt is full and consumers don't try to take products when the belt is empty. This requires coordination to avoid situations where either the producers or consumers are waiting unnecessarily.
 
-
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -17,44 +16,37 @@ void producer(int id) {
     int product = 0;
     while (true) {
         std::unique_lock<std::mutex> lock(mtx);
-        cv.wait(lock, []{ return buffer.size() < BUFFER_SIZE; }); // Wait if buffer is full
-
+        cv.wait(lock, []{ return buffer.size() < BUFFER_SIZE; });
         buffer.push(product++);
-        std::cout << "Producer " << id << " produced " << product << std::endl;
-
+        std::cout << "Producer " << id << " produced " << product << "\n";
         lock.unlock();
-        cv.notify_all(); // Notify consumers
-        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Simulate work
+        cv.notify_all();
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
 
 void consumer(int id) {
     while (true) {
         std::unique_lock<std::mutex> lock(mtx);
-        cv.wait(lock, []{ return !buffer.empty(); }); // Wait if buffer is empty
-
+        cv.wait(lock, []{ return !buffer.empty(); });
         int product = buffer.front();
         buffer.pop();
-        std::cout << "Consumer " << id << " consumed " << product << std::endl;
-
+        std::cout << "Consumer " << id << " consumed " << product << "\n";
         lock.unlock();
-        cv.notify_all(); // Notify producers
-        std::this_thread::sleep_for(std::chrono::milliseconds(150)); // Simulate work
+        cv.notify_all();
+        std::this_thread::sleep_for(std::chrono::milliseconds(150));
     }
 }
 
 int main() {
     std::thread producers[2], consumers[2];
-
     for (int i = 0; i < 2; ++i) {
         producers[i] = std::thread(producer, i + 1);
         consumers[i] = std::thread(consumer, i + 1);
     }
-
     for (int i = 0; i < 2; ++i) {
         producers[i].join();
         consumers[i].join();
     }
-
     return 0;
 }
