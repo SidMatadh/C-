@@ -8,57 +8,48 @@ The system avoids deadlock, where all philosophers are waiting indefinitely to p
 #include <iostream>
 #include <thread>
 #include <mutex>
-#include <chrono>
 #include <vector>
+#include <chrono>
 
 class DiningPhilosophers {
 public:
-    DiningPhilosophers(int numPhilosophers) : forks(numPhilosophers) {}
+    DiningPhilosophers(int n) : forks(n) {}
 
-    void dine(int philosopher) {
+    void dine(int p) {
         while (true) {
-            think(philosopher);
-            eat(philosopher);
+            think(p);
+            eat(p);
         }
     }
 
 private:
     std::vector<std::mutex> forks;
 
-    void think(int philosopher) {
-        std::cout << "Philosopher " << philosopher << " is thinking." << std::endl;
+    void think(int p) {
+        std::cout << "Philosopher " << p << " is thinking.\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
-    void eat(int philosopher) {
-        int leftFork = philosopher;
-        int rightFork = (philosopher + 1) % forks.size();
-
-        // Pick up forks (use std::lock to avoid deadlock)
-        std::lock(forks[leftFork], forks[rightFork]);
-
-        std::lock_guard<std::mutex> leftLock(forks[leftFork], std::adopt_lock);
-        std::lock_guard<std::mutex> rightLock(forks[rightFork], std::adopt_lock);
-
-        std::cout << "Philosopher " << philosopher << " is eating." << std::endl;
+    void eat(int p) {
+        int left = p, right = (p + 1) % forks.size();
+        std::lock(forks[left], forks[right]);
+        std::lock_guard<std::mutex> lLock(forks[left], std::adopt_lock);
+        std::lock_guard<std::mutex> rLock(forks[right], std::adopt_lock);
+        std::cout << "Philosopher " << p << " is eating.\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(150));
-
-        // Forks are automatically released when lock_guard goes out of scope
     }
 };
 
 int main() {
-    const int numPhilosophers = 5;
-    DiningPhilosophers dp(numPhilosophers);
-    std::vector<std::thread> philosophers;
+    const int n = 5;
+    DiningPhilosophers dp(n);
+    std::vector<std::thread> threads;
 
-    for (int i = 0; i < numPhilosophers; ++i) {
-        philosophers.push_back(std::thread(&DiningPhilosophers::dine, &dp, i));
-    }
+    for (int i = 0; i < n; ++i)
+        threads.push_back(std::thread(&DiningPhilosophers::dine, &dp, i));
 
-    for (auto& philosopher : philosophers) {
-        philosopher.join();
-    }
+    for (auto& t : threads)
+        t.join();
 
     return 0;
 }
