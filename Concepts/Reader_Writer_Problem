@@ -19,7 +19,6 @@ int read_count = 0;
 bool is_writing = false;
 
 void reader(int id) {
-    while (true) {
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, []{ return !is_writing; });
         ++read_count;
@@ -31,11 +30,9 @@ void reader(int id) {
         lock.lock();
         --read_count;
         if (read_count == 0) cv.notify_all();
-    }
 }
 
 void writer(int id) {
-    while (true) {
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, []{ return !is_writing && read_count == 0; });
         is_writing = true;
@@ -47,7 +44,6 @@ void writer(int id) {
         lock.lock();
         is_writing = false;
         cv.notify_all();
-    }
 }
 
 int main() {
