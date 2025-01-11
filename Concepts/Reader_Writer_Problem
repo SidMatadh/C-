@@ -1,4 +1,6 @@
-Imagine a library with a single book that multiple people want to read. Readers can read the book simultaneously without any issue, but if someone wants to write (or edit) the book, they need exclusive access. This means no one else should be reading or writing the book at the same time. The challenge is to coordinate the access so that:
+Imagine a library with a single book that multiple people want to read. Readers can read the book simultaneously without any issue, but if someone wants to write 
+(or edit) the book, they need exclusive access. This means no one else should be reading or writing the book at the same time. The challenge is to coordinate the 
+access so that:
 
 
 Multiple readers can read at the same time.
@@ -29,8 +31,6 @@ void reader(int id) {
         lock.lock();
         --read_count;
         if (read_count == 0) cv.notify_all();
-        lock.unlock();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
 
@@ -47,8 +47,6 @@ void writer(int id) {
         lock.lock();
         is_writing = false;
         cv.notify_all();
-        lock.unlock();
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
 
