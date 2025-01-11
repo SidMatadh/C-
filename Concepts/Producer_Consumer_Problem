@@ -1,4 +1,6 @@
-Imagine you have a factory with two types of workers: producers and consumers. The producers create products and place them on a conveyor belt (a shared resource), while the consumers take products from the belt and use them. The challenge is to ensure that producers don't add products when the belt is full and consumers don't try to take products when the belt is empty. This requires coordination to avoid situations where either the producers or consumers are waiting unnecessarily.
+Imagine you have a factory with two types of workers: producers and consumers. The producers create products and place them on a conveyor belt (a shared resource), 
+while the consumers take products from the belt and use them. The challenge is to ensure that producers don't add products when the belt is full and consumers don't
+try to take products when the belt is empty. This requires coordination to avoid situations where either the producers or consumers are waiting unnecessarily.
 
 #include <iostream>
 #include <thread>
