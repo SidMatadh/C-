@@ -2,6 +2,10 @@ Imagine you have a factory with two types of workers: producers and consumers. T
 while the consumers take products from the belt and use them. The challenge is to ensure that producers don't add products when the belt is full and consumers don't
 try to take products when the belt is empty. This requires coordination to avoid situations where either the producers or consumers are waiting unnecessarily.
 
+Where do we use
+Logging and Monitoring: Managing logs and system events where producers generate log entries and consumers process or store these logs.
+Policy Evaluation: Handling policy requests where one component produces requests for policy evaluation and another consumes these requests to enforce or log them.
+
 #include <iostream>
 #include <thread>
 #include <mutex>
@@ -16,7 +20,6 @@ std::condition_variable cv;
 
 void producer(int id) {
     int product = 0;
-    while (true) {
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, []{ return buffer.size() < BUFFER_SIZE; });
         buffer.push(product++);
@@ -24,11 +27,9 @@ void producer(int id) {
         lock.unlock();
         cv.notify_all();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
 }
 
 void consumer(int id) {
-    while (true) {
         std::unique_lock<std::mutex> lock(mtx);
         cv.wait(lock, []{ return !buffer.empty(); });
         int product = buffer.front();
@@ -37,7 +38,6 @@ void consumer(int id) {
         lock.unlock();
         cv.notify_all();
         std::this_thread::sleep_for(std::chrono::milliseconds(150));
-    }
 }
 
 int main() {
