@@ -1,0 +1,48 @@
+Synchronization primitives are low-level building blocks provided by programming languages or operating systems to help implement synchronization. 
+They are the fundamental mechanisms used to manage access to shared resources.
+
+Types of Synchronization Primitives
+
+Locks/Mutexes (Mutual Exclusion)
+Prevents multiple threads from entering a critical section simultaneously.
+Example: std::mutex in C++, pthread_mutex in POSIX.
+
+Semaphores
+Generalized locking mechanism allowing a limited number of threads to access a resource simultaneously.
+Example: std::counting_semaphore in C++20, sem_t in POSIX.
+
+Spinlocks
+A lock where a thread continuously checks for the lock to be released (busy-waiting).
+Useful when the wait time is short.
+
+Condition Variables
+Used to block a thread until a particular condition is met.
+Works with a mutex for signaling.
+Example: std::condition_variable in C++.
+
+Read-Write Locks
+Allow multiple readers or one writer at a time.
+Example: pthread_rwlock in POSIX.
+
+Atomic Variables
+Guarantee atomic operations on shared variables without the need for explicit locks.
+Example: std::atomic in C++.
+
+Futures and Promises
+Used for synchronizing results between threads.
+Example: std::future and std::promise in C++.
+
+Synchronization Problems
+Without proper synchronization, concurrency issues arise:
+
+Race Conditions
+Occurs when multiple threads/processes access shared data simultaneously, leading to unpredictable results.
+
+Deadlocks
+Two or more threads wait indefinitely for resources locked by each other.
+
+Starvation
+A thread waits indefinitely to acquire a resource because other higher-priority threads are continuously served.
+
+Livelocks
+Threads keep responding to each other’s changes without making progress.
