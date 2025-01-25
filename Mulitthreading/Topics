@@ -7,6 +7,12 @@
 Different states of a process
 8.⁠ ⁠Thread design patterns
 9.⁠ ⁠⁠Abstract data structures priority queue and deques
-Different states of a process
-8.⁠ ⁠Thread design patterns
-9.⁠ ⁠⁠Abstract data structures priority queue and deques
+10.⁠ ⁠Deadlocks, Race conditions
+11.⁠ ⁠⁠ Thread safety and life cycle management 
+12.⁠ ⁠⁠Mutex vs Semaphore 
+13.⁠ ⁠⁠Condition variables
+14.⁠ ⁠⁠memory model
+15.⁠ ⁠⁠Multithreading problems like Producer consumer problem 
+Dining philosopher problem
+Readers Writers problem
+16. ThreadSanitizer and Valgrind
