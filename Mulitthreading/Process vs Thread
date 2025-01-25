@@ -1,0 +1,19 @@
+What is a Process?
+A process is an instance of a program in execution.
+It contains the program code and its current activity (such as program counter, registers, and variables).
+Each process has its own memory space (heap, stack, data, and code segments).
+Processes are isolated from one another, providing stability and security.
+Key Features of Processes:
+Independent: Processes do not share memory or resources directly.
+Heavyweight: Creating or managing a process is resource-intensive as it involves allocating separate memory and resources.
+Inter-Process Communication (IPC): Processes need mechanisms like pipes, sockets, or shared memory to communicate, which adds complexity.
+State: Processes have well-defined states: new, ready, running, waiting, terminated.
+
+What is a Thread?
+A thread is the smallest unit of a process that can be scheduled for execution.
+It runs within the context of a process and shares the process's memory and resources.
+A single process can have multiple threads, known as multithreading.
+Key Features of Threads:
+Lightweight: Threads are faster and less resource-intensive to create and manage.
+Shared Memory: Threads within the same process share the same memory, enabling efficient communication.
+Concurrency: Multiple threads in a process can run concurrently, improving application responsiveness and performance
