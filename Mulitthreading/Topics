@@ -1,18 +1,13 @@
-1.⁠ ⁠What is a thread, Process and difference between both
-2.⁠ ⁠What is synchronization, synchronization primitives
-3.⁠ ⁠Ways of creating threads
-4.⁠ ⁠Odd even program
-5.⁠ ⁠Detect critical section in a program 
-6.⁠ ⁠IPC mechanism
-Different states of a process
-8.⁠ ⁠Thread design patterns
-9.⁠ ⁠⁠Abstract data structures priority queue and deques
-10.⁠ ⁠Deadlocks, Race conditions
-11.⁠ ⁠⁠ Thread safety and life cycle management 
-12.⁠ ⁠⁠Mutex vs Semaphore 
-13.⁠ ⁠⁠Condition variables
-14.⁠ ⁠⁠memory model
-15.⁠ ⁠⁠Multithreading problems like Producer consumer problem 
-Dining philosopher problem
-Readers Writers problem
-16. ThreadSanitizer and Valgrind
+What is a thread, Process and difference between both
+Ways of creating threads
+Thread safety and life cycle management
+What is synchronization, synchronization primitives
+Mutex vs Semaphore
+Multithreading problems like Producer-consumer problem, Dining philosopher problem, Readers Writers problem
+IPC mechanism
+Detect critical section in a program
+Thread design patterns
+Abstract data structures: priority queue and deques
+Memory model
+ThreadSanitizer and Valgrind
+Odd-even program
