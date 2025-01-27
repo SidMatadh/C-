@@ -1,0 +1,4 @@
+Sequence: vector, list, deque, array
+Associative: set, map, multiset, multimap
+Unordered: unordered_set, unordered_map
+Adaptors: stack, queue, priority_queue
