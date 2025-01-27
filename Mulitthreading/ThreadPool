@@ -1,0 +1,129 @@
+#include <iostream>
+#include <thread>
+#include <vector>
+#include <queue>
+#include <functional>
+#include <mutex>
+#include <condition_variable>
+
+class ThreadPool {
+public:
+    ThreadPool(size_t numThreads);
+    ~ThreadPool();
+    void enqueue(std::function<void()> task);
+
+private:
+    void worker();
+    std::vector<std::thread> workers;
+    std::queue<std::function<void()>> tasks;
+    std::mutex tasksMutex;
+    std::condition_variable condition;
+    bool stop;
+};
+
+ThreadPool::ThreadPool(size_t numThreads) : stop(false) {
+    for (size_t i = 0; i < numThreads; ++i)
+        workers.emplace_back(&ThreadPool::worker, this);
+}
+
+ThreadPool::~ThreadPool() {
+    {
+        std::lock_guard<std::mutex> lock(tasksMutex);
+        stop = true;
+    }
+    condition.notify_all();
+    for (auto &worker : workers) worker.join();
+}
+
+void ThreadPool::enqueue(std::function<void()> task) {
+    {
+        std::lock_guard<std::mutex> lock(tasksMutex);
+        tasks.push(task);
+    }
+    condition.notify_one();
+}
+
+void ThreadPool::worker() {
+    while (true) {
+        std::function<void()> task;
+        {
+            std::unique_lock<std::mutex> lock(tasksMutex);
+            condition.wait(lock, [this] { return stop || !tasks.empty(); });
+            if (stop && tasks.empty()) return;
+            task = tasks.front();
+            tasks.pop();
+        }
+        task();
+    }
+}
+
+void printMessage(int id) {
+    std::cout << "Task " << id << " executed by thread " << std::this_thread::get_id() << std::endl;
+}
+
+int main() {
+    ThreadPool pool(4);
+    for (int i = 1; i <= 5; ++i) {
+        pool.enqueue([i]() { printMessage(i); });
+    }
+    return 0;
+}
+
+
+
+
+
+Q: What is a thread pool, and why is it useful?
+A: A thread pool is a collection of pre-instantiated worker threads that can be reused to perform multiple tasks. It reduces the overhead of creating and destroying threads repeatedly, as it maintains a pool of threads ready to process tasks. This improves performance, especially for applications that need to handle a large number of tasks.
+
+2. Thread Pool Design:
+Q: How would you design a thread pool in C++?
+A: Explain the components of a thread pool, including:
+A task queue to store pending tasks.
+A fixed set of worker threads that fetch and execute tasks from the queue.
+Synchronization mechanisms (like mutex and condition variables) to ensure safe access to the task queue.
+A mechanism to stop the pool gracefully, ensuring that all threads complete their tasks before exiting.
+
+3. Thread Safety:
+Q: How would you ensure thread safety in a thread pool?
+A: Thread safety can be ensured by using a mutex to protect shared data (such as the task queue) from concurrent access by multiple threads. A condition variable can be used to notify threads when there are new tasks to process.
+
+4. Resource Management:
+Q: What happens if the task queue becomes full in a thread pool? How would you handle that?
+A: If the queue becomes full, tasks might be dropped, rejected, or queued for later processing. One approach could be to block the enqueueing thread until space becomes available, or to use a bounded queue with a timeout or error code to indicate failure.
+
+5. Performance Considerations:
+Q: How would you ensure your thread pool is efficient in a real-world application?
+A: Efficiency can be achieved by:
+Balancing the number of threads to avoid resource contention (too many threads can cause excessive context switching).
+Properly managing task distribution to avoid overloading specific threads.
+Using work-stealing algorithms if threads are idle, allowing them to steal tasks from other threads.
+
+6. Stopping the Thread Pool:
+Q: How would you safely shut down a thread pool?
+A: To safely shut down a thread pool:
+Set a flag (like stop) that tells the worker threads to finish executing and exit.
+Ensure that all threads complete their tasks (by calling join() on them).
+Make sure any tasks in the queue that haven't started yet are either completed or discarded.
+
+7. Handling Exceptions:
+Q: How would you handle exceptions thrown by tasks in a thread pool?
+A: Exceptions in a thread pool should be caught within each worker thread to prevent the thread from terminating unexpectedly. One strategy is to catch exceptions inside the worker function and log or handle them appropriately. It may also be useful to rethrow exceptions to propagate them back to the main thread if necessary.
+
+8. Scalability:
+Q: How can you make your thread pool scalable?
+A: To make a thread pool scalable:
+Dynamically adjust the number of threads based on workload (e.g., increasing threads during high demand and reducing them during low demand).
+Use a dynamic task queue that grows or shrinks as needed.
+Optimize task allocation and thread synchronization to minimize contention and bottlenecks.
+
+9. Advanced Scenarios:
+Q: How would you implement a thread pool that can handle tasks with different priorities?
+A: This can be achieved by using a priority queue to order tasks based on priority. The worker threads would pick tasks from the queue based on their priority level, ensuring high-priority tasks are processed before low-priority tasks.
+
+10. Real-Life Application:
+Q: Can you provide an example of where a thread pool would be useful in a real-world application?
+A: Examples could include:
+A web server that uses a thread pool to handle incoming client requests concurrently.
+A database query executor that can run multiple queries in parallel.
+A background processing system that processes data in chunks using a thread pool to improve throughput.
