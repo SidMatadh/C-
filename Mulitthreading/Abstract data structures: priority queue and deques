@@ -1,0 +1,88 @@
+Priority Queue:
+
+A Priority Queue (PQ) is an abstract data structure in which each element is associated with a priority. 
+Elements are dequeued based on priority, not the order of insertion.
+In a priority queue, the element with the highest priority is served first.
+Key Operations:
+Insert: Add an element with a priority.
+Extract-Min/Max: Remove and return the element with the highest priority (based on the type of priority queue, min or max).
+Top/Peek: View the element with the highest priority without removing it.
+Types of Priority Queues:
+Max-priority queue: The element with the highest priority (largest value) is dequeued first.
+Min-priority queue: The element with the lowest priority (smallest value) is dequeued first.
+
+
+
+
+A Deque (Double-Ended Queue) is an abstract data structure that allows elements to be added or removed from both ends (front and back) 
+efficiently.
+
+Key Operations:
+
+Push Front: Add an element to the front of the deque.
+Push Back: Add an element to the back of the deque.
+Pop Front: Remove an element from the front of the deque.
+Pop Back: Remove an element from the back of the deque.
+Front: View the front element without removing it.
+Back: View the back element without removing it.
+
+Priority Queue:
+
+#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
+int main() {
+    // Max-priority queue (default behavior)
+    priority_queue<int> pq;
+
+    pq.push(10);
+    pq.push(30);
+    pq.push(20);
+
+    cout << "Top element: " << pq.top() << endl; // Should print 30
+
+    pq.pop();
+    cout << "Top after pop: " << pq.top() << endl; // Should print 20
+
+    // Min-priority queue
+    priority_queue<int, vector<int>, greater<int>> min_pq;
+    
+    min_pq.push(10);
+    min_pq.push(30);
+    min_pq.push(20);
+
+    cout << "Top element in min-priority queue: " << min_pq.top() << endl; // Should print 10
+
+    return 0;
+}
+
+
+
+
+Deque (Double-Ended Queue) 
+
+#include <iostream>
+#include <deque>
+using namespace std;
+
+int main() {
+    deque<int> dq;
+
+    // Push elements to both ends
+    dq.push_back(10);  // Push back
+    dq.push_front(20); // Push front
+    dq.push_back(30);
+    
+    cout << "Front element: " << dq.front() << endl;  // Should print 20
+    cout << "Back element: " << dq.back() << endl;    // Should print 30
+
+    dq.pop_front();  // Remove front element
+    cout << "Front after pop: " << dq.front() << endl; // Should print 10
+
+    dq.pop_back();   // Remove back element
+    cout << "Back after pop: " << dq.back() << endl;   // Should print 10
+
+    return 0;
+}
