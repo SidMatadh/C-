@@ -1,0 +1,34 @@
+#include <iostream>
+#include <thread>
+using namespace std;
+
+class Example {
+public:
+    void operator()(int x) {
+        cout << "Functor: x = " << x << endl;
+    }
+};
+
+void printMethod(int x) {
+    cout << "Function pointer: x = " << x << endl;
+}
+
+int main() {
+    int x = 5;
+
+    // Create and join threads
+    thread t1(printMethod, x); // Using function pointer
+    thread t2(Example(), x);    // Using functor
+    thread t3([](){ cout << "No capture" << endl; }); // Lambda with no capture
+    thread t4([=]() { cout << "By value x = " << x << endl; }); // Lambda with capture by value
+    thread t5([&]() { cout << "By reference x = " << x << endl; }); // Lambda with capture by reference
+
+    // Joining all threads
+    t1.join();
+    t2.join();
+    t3.join();
+    t4.join();
+    t5.join();
+    
+    return 0;
+}
