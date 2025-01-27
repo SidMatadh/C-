@@ -6,9 +6,8 @@ Mutex vs Semaphore
 Multithreading problems like Producer-consumer problem, Dining philosopher problem, Readers Writers problem
 IPC mechanism
 Detect critical section in a program
-Thread design patterns
+Thread design patterns like thread pool, producer consumer pattern.
 Abstract data structures: priority queue and deques
 Memory model
-ThreadSanitizer and Valgrind
+ThreadSanitizer
 Odd-even program
-thread pool
