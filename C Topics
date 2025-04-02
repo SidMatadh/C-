@@ -1,0 +1,52 @@
+ Topics Covered in C and data Structure
+
+
+1️⃣ Core C Concepts
+* Variables, Constants, Volatile
+* Operators (Arithmetic, Logical, Bitwise)
+* Bitwise Operations & Shift Operators
+* Pointers (Single, Double, Function Pointers)
+* Structures, Unions, Enums
+* Typedef, #define, inline, static, Global/Local Functions
+* Pass by Value & Reference
+* Recursion
+2️⃣ Data Structures
+* Array
+* Stack
+* Queue
+* Dynamic Array
+* Linked List (All types)
+* Binary Search Tree (BST)
+* Vector
+* Standard Template Library (STL - for C++)
+3️⃣ Memory & System-Level Programming
+* Dynamic Memory Allocation (malloc, calloc, realloc, free)
+* Memory Layout (Stack, Heap, Data, Text Segments)
+* Storage Classes (auto, static, extern, register)
+4️⃣ File Handling & System Programming
+* File Handling (fopen, fclose, fread, fwrite, fseek)
+* Error Handling (perror(), strerror())
+* Inter-Process Communication (IPC) (Pipes, Message Queues, Shared Memory)
+* Multithreading (POSIX Threads, Synchronization)
+* Socket Programming (TCP/UDP)
+5️⃣ Algorithms
+* Searching (Binary Search, Linear Search)
+* Sorting (Bubble Sort, Quick Sort, Merge Sort, etc.)
+
+📌 Programs Practiced
+* String Operations:
+    * strcpy, strncpy, strlen
+    * Copy string without strcpy()
+    * Duplicate words, Duplicate & Unique characters
+* Bitwise Operations:
+    * Power of 2 Check
+    * Swap numbers using Bitwise XOR (without temp variable)
+* Mathematical Problems:
+    * Finding the Second Largest Number
+    * Prime Numbers, Fibonacci Series (Recursive & Iterative)
+    * Reverse a Number & a String
+    * Check if a Number is a Perfect Square
+    * Convert Binary to Decimal & Decimal to Binary
+* Sorting & Searching:
+    * Bubble Sort
+    * Binary Search
