@@ -2,44 +2,13 @@
 #include <string.h>
 
 int main() {
-    char str[] = "MY NAME MY NAME";
-    char str1[50][50];
-    int n = 0;
-    int i, j, count = 0;
-    int len = strlen(str);
-
-    // Split the string into words
-    char *ptr = strtok(str, " ");
-    while (ptr != NULL && n < len) {
-        strcpy(str1[n], ptr);
-        n++;
-        ptr = strtok(NULL, " ");
-    }
-
-    // Check for duplicate words
-    for (i = 0; i < n; i++) {
-        for (j = i + 1; j < n; j++) {
-            if (strcmp(str1[i], str1[j]) == 0) {
-                printf("Duplicate word: %s\n", str1[i]);
-            }
-        }
-    }
-
-    return 0;
-}
-
-.....................
-
-#include <stdio.h>
-#include <string.h>
-
-int main() {
-    char str[] = "MY NAME MY NAME";
+    char str[] = "MY NAME MY NAME NAME";
     char str1[50][50];
     int n = 0;
     int i, j, count = 0;
     int len = strlen(str);
     char word[50];
+    int printed[50] = {0}; // Array to track printed duplicates
 
     // Split the string into words
     for (i = 0; i < len; i++) {
@@ -57,47 +26,18 @@ int main() {
     strcpy(str1[n], word);
     n++;
 
-    // Check for duplicate words
+    // Check for duplicate words and print only once
     for (i = 0; i < n; i++) {
-        for (j = i + 1; j < n; j++) {
-            if (strcmp(str1[i], str1[j]) == 0)
-                printf("Duplicate word: %s\n", str1[i]);
-        }
-    }
-
-    return 0;
-}
-................
-
-#include <stdio.h>
-#include <string.h>
-
-int main() {
-    char str[] = "MY NAME MY NAME Sid MY Sid";
-    char str1[50][50];
-    int n = 0, wordStart = 0, i, j, count = 0;
-    int len = strlen(str);
-
-    // Split the string into words
-    for (i = 0; i <= len; i++) {
-        if (str[i] == ' ' || str[i] == '\0') {
-            int wordEnd = i - 1;
-            int wordLen = wordEnd - wordStart + 1;
-            strncpy(str1[n], str + wordStart, wordLen);
-            str1[n][wordLen] = '\0';
-            n++;
-            wordStart = i + 1;
-        }
-    }
-        
-    
-
-    // Check for duplicate words
-    for (i = 0; i < n; i++) {
+        int duplicate = 0;
         for (j = i + 1; j < n; j++) {
             if (strcmp(str1[i], str1[j]) == 0) {
-                printf("Duplicate word: %s\n", str1[i]);
+                duplicate = 1;
+                printed[j] = 1; // Mark duplicate as printed
             }
+        }
+        if (duplicate && printed[i] == 0) { // Print only if not already printed
+            printf("Duplicate word: %s\n", str1[i]);
+            printed[i] = 1;
         }
     }
 
