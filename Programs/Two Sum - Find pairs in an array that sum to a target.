@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+void findAllTwoSumPairs(int* nums, int numsSize, int target) {
+    bool used[numsSize];
+    for (int i = 0; i < numsSize; i++) {
+        used[i] = false;
+    }
+
+    for (int i = 0; i < numsSize; i++) {
+        if (used[i]) continue;
+        for (int j = i + 1; j < numsSize; j++) {
+            if (used[j]) continue;
+            if (nums[i] + nums[j] == target) {
+                printf("Pair found at indices: %d and %d\n", i, j);
+                used[i] = true;
+                used[j] = true;
+                break; // Move to the next i
+            }
+        }
+    }
+}
+
+int main() {
+    int nums[] = {2, 7, 11, 2, 7, 2, 7};
+    int target = 9;
+    int numsSize = sizeof(nums) / sizeof(nums[0]);
+
+    findAllTwoSumPairs(nums, numsSize, target);
+
+    return 0;
+}
