@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    int *a;
+    char b[50];
+} Person;
+
+void serialize(const Person *p1, const char *filename) {
+    FILE *file = fopen(filename, "wb");
+    if (file == NULL) {
+        perror("Failed to open file for writing");
+        return;
+    }
+
+    size_t a_length = strlen(p1->a) + 1;
+    fwrite(&a_length, sizeof(a_length), 1, file);
+    fwrite(p1->a, sizeof(int), a_length, file);
+    fwrite(p1->b, sizeof(char), sizeof(p1->b), file);
+
+    fclose(file);
+}
+
+void deserialize(Person *p1, const char *filename) {
+    FILE *file = fopen(filename, "rb");
+    if (file == NULL) {
+        perror("Failed to open file for reading");
+        return;
+    }
+    size_t a_length;
+    fread(&a_length, sizeof(a_length), 1, file);
+
+    p1->a = malloc(a_length * sizeof(int));
+    if (p1->a == NULL) {
+        perror("Failed to allocate memory");
+        fclose(file);
+        return;
+    }
+    fread(p1->a, sizeof(int), a_length, file);
+    fread(p1->b, sizeof(char), sizeof(p1->b), file);
+
+    fclose(file);
+}
+
+int main() {
+    int value = 1;
+    Person p1 = {&value, "Sidd"};
+    const char *filename = "test.dat";
+
+    serialize(&p1, filename);
+
+    Person p2;
+    deserialize(&p2, filename);
+
+    printf("a: %d\n", *(p2.a));
+    printf("b: %s\n", p2.b);
+
+    free(p2.a);
+
+    return 0;
+}
