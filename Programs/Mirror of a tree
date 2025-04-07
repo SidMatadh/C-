@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Function to create a new node
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*) malloc(sizeof(struct Node));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// Function to mirror a tree
+void mirror(struct Node* root) {
+    if (root == NULL) return;
+
+    // Recursively mirror left and right subtrees
+    mirror(root->left);
+    mirror(root->right);
+
+    // Swap left and right pointers
+    struct Node* temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+}
+
+// Inorder traversal for display
+void inorder(struct Node* root) {
+    if (root == NULL) return;
+    inorder(root->left);
+    printf("%d ", root->data);
+    inorder(root->right);
+}
+
+int main() {
+    // Build the tree
+    struct Node* root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+
+    printf("Inorder before mirroring: ");
+    inorder(root);
+
+    mirror(root);
+
+    printf("\nInorder after mirroring: ");
+    inorder(root);
+
+    return 0;
+}
