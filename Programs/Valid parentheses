@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+
+#define MAX 1000
+
+// Stack structure
+typedef struct {
+    char items[MAX];
+    int top;
+} Stack;
+
+// Stack operations
+void init(Stack* s) {
+    s->top = -1;
+}
+
+bool isEmpty(Stack* s) {
+    return s->top == -1;
+}
+
+void push(Stack* s, char ch) {
+    if (s->top < MAX - 1) {
+        s->items[++(s->top)] = ch;
+    }
+}
+
+char pop(Stack* s) {
+    if (!isEmpty(s)) {
+        return s->items[(s->top)--];
+    }
+    return '\0';
+}
+
+char peek(Stack* s) {
+    return s->items[s->top];
+}
+
+bool isValid(char* s) {
+    Stack stack;
+    init(&stack);
+
+    for (int i = 0; i < strlen(s); i++) {
+        char ch = s[i];
+        if (ch == '(' || ch == '{' || ch == '[') {
+            push(&stack, ch);
+        } else {
+            if (isEmpty(&stack)) return false;
+
+            char top = pop(&stack);
+            if ((ch == ')' && top != '(') ||
+                (ch == '}' && top != '{') ||
+                (ch == ']' && top != '[')) {
+                return false;
+            }
+        }
+    }
+
+    return isEmpty(&stack); // Stack should be empty if valid
+}
+
+int main() {
+    char s[] = "({[]})";
+    if (isValid(s)) {
+        printf("Valid parentheses\n");
+    } else {
+        printf("Invalid parentheses\n");
+    }
+    return 0;
+}
