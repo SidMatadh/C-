@@ -44,7 +44,6 @@ void deserialize(Person *p1, const char *filename) {
 }
 
 int main() {
-    int value = 1;
     Person p1 = {&value, "Sidd"};
     const char *filename = "test.dat";
 
