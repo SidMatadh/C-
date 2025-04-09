@@ -1,0 +1,28 @@
+#include <iostream>
+#include <queue>
+
+int main() {
+    // Initialization
+    std::queue<int> myQueue;
+
+    // Modifiers
+    myQueue.push(10);
+    myQueue.push(20);
+    myQueue.push(30);
+
+    // Element access
+    std::cout << "Front element: " << myQueue.front() << std::endl;
+    std::cout << "Back element: " << myQueue.back() << std::endl;
+
+    // Capacity
+    std::cout << "Queue size: " << myQueue.size() << std::endl;
+    std::cout << "Is queue empty? " << (myQueue.empty() ? "Yes" : "No") << std::endl;
+
+    // Pop elements
+    while (!myQueue.empty()) {
+        std::cout << "Removing: " << myQueue.front() << std::endl;
+        myQueue.pop();
+    }
+
+    return 0;
+}
