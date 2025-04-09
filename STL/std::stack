@@ -1,0 +1,27 @@
+#include <iostream>
+#include <stack>
+
+int main() {
+    // Initialization
+    std::stack<int> myStack;
+
+    // Modifiers
+    myStack.push(10);
+    myStack.push(20);
+    myStack.push(30);
+
+    // Element access
+    std::cout << "Top element: " << myStack.top() << std::endl;
+
+    // Capacity
+    std::cout << "Stack size: " << myStack.size() << std::endl;
+    std::cout << "Is stack empty? " << (myStack.empty() ? "Yes" : "No") << std::endl;
+
+    // Pop elements
+    while (!myStack.empty()) {
+        std::cout << "Popping: " << myStack.top() << std::endl;
+        myStack.pop();
+    }
+
+    return 0;
+}
