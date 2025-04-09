@@ -1,43 +1,40 @@
 #include <iostream>
 #include <array>
-#include <algorithm> // For std::sort
-#include <tuple>     // For std::get
+#include <algorithm>
 
 int main() {
-    // 1. Initialization
-    std::array<int, 5> myArray = {5, 3, 4, 1, 2};
+    // Initialization
+    std::array<int, 5> arr = {1, 2, 3, 4, 5};
 
-    // 2. Element Access
-    std::cout << "Element at index 2: " << myArray.at(2) << std::endl;
-    std::cout << "First element: " << myArray.front() << std::endl;
-    std::cout << "Last element: " << myArray.back() << std::endl;
+    // Element access
+    std::cout << "Element at index 2: " << arr.at(2) << std::endl;
+    std::cout << "First element: " << arr.front() << std::endl;
+    std::cout << "Last element: " << arr.back() << std::endl;
 
-    // 3. Iterators
+    // Iterators
     std::cout << "Array elements: ";
-    for (auto it = myArray.begin(); it != myArray.end(); ++it) {
+    for (auto it = arr.begin(); it != arr.end(); ++it) {
         std::cout << *it << " ";
     }
     std::cout << std::endl;
 
-    // 4. Capacity
-    std::cout << "Array size: " << myArray.size() << std::endl;
-    std::cout << "Is array empty? " << (myArray.empty() ? "Yes" : "No") << std::endl;
+    // Capacity
+    std::cout << "Array size: " << arr.size() << std::endl;
+    std::cout << "Array max_size: " << arr.max_size() << std::endl;
+    std::cout << "Is array empty? " << (arr.empty() ? "Yes" : "No") << std::endl;
 
-    // 5. Modifiers
-    myArray.fill(10);
+    // Operations
+    arr.fill(10);
     std::cout << "Array after fill: ";
-    for (const auto& elem : myArray) {
+    for (const auto& elem : arr) {
         std::cout << elem << " ";
     }
     std::cout << std::endl;
 
-    // Resetting array to original values
-    myArray = {5, 3, 4, 1, 2};
-
-    // 6. Operations
-    std::sort(myArray.begin(), myArray.end());
-    std::cout << "Sorted array: ";
-    for (const auto& elem : myArray) {
+    std::array<int, 5> arr2 = {5, 4, 3, 2, 1};
+    arr.swap(arr2);
+    std::cout << "Array after swap with arr2: ";
+    for (const auto& elem : arr) {
         std::cout << elem << " ";
     }
     std::cout << std::endl;
