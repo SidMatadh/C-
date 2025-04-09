@@ -1,0 +1,18 @@
++----------------------+------------------------+-------------+-------------+-------------+-----------+------------+--------------------------+
+| Container            | Underlying DS         | Insert      | Delete      | Access      | Ordered?  | Duplicates | Access Type              |
++----------------------+------------------------+-------------+-------------+-------------+-----------+------------+--------------------------+
+| std::array           | Fixed-size array       | O(1)        | O(1)        | O(1)        | Yes       | Yes        | Index ([i])              |
+| std::vector          | Dynamic array          | O(1)*       | O(n)        | O(1)        | Yes       | Yes        | Index ([i])              |
+| std::deque           | Double-ended array     | O(1) ends   | O(1) ends   | O(1)        | Yes       | Yes        | Index ([i])              |
+| std::list            | Doubly linked list     | O(1) w/ itr | O(1) w/ itr | O(n)        | No        | Yes        | Iterator only            |
+| std::forward_list    | Singly linked list     | O(1) front  | O(1) front  | O(n)        | No        | Yes        | Iterator only            |
+| std::set             | Red-Black Tree         | O(log n)    | O(log n)    | O(log n)    | Yes       | No         | Iterator/key             |
+| std::multiset        | Red-Black Tree         | O(log n)    | O(log n)    | O(log n)    | Yes       | Yes        | Iterator                 |
+| std::map             | Red-Black Tree         | O(log n)    | O(log n)    | O(log n)    | Yes       | No         | Key ([key])              |
+| std::multimap        | Red-Black Tree         | O(log n)    | O(log n)    | O(log n)    | Yes       | Yes        | Key range (equal_range)  |
+| std::unordered_set   | Hash Table             | O(1)*       | O(1)*       | O(1)*       | No        | No         | Key                     |
+| std::unordered_map   | Hash Table             | O(1)*       | O(1)*       | O(1)*       | No        | No         | Key ([key])              |
+| std::stack           | Deque (by default)     | O(1)        | O(1)        | O(1) (top)  | No        | N/A        | Top only (LIFO)          |
+| std::queue           | Deque (by default)     | O(1)        | O(1)        | O(1) (front)| No        | N/A        | Front only (FIFO)        |
+| std::priority_queue  | Binary Heap (Max-Heap) | O(log n)    | O(log n)    | O(1) (top)  | No        | Yes        | Top element only (max)   |
++----------------------+------------------------+-------------+-------------+-------------+-----------+------------+--------------------------+
