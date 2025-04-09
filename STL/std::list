@@ -1,0 +1,65 @@
+#include <iostream>
+#include <list>
+
+int main() {
+    // Initialization
+    std::list<int> lst = {1, 2, 3, 4, 5};
+
+    // Element access
+    std::cout << "First element: " << lst.front() << std::endl;
+    std::cout << "Last element: " << lst.back() << std::endl;
+
+    // Iterators
+    std::cout << "List elements: ";
+    for (auto it = lst.begin(); it != lst.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    // Capacity
+    std::cout << "List size: " << lst.size() << std::endl;
+    std::cout << "Is list empty? " << (lst.empty() ? "Yes" : "No") << std::endl;
+
+    // Modifiers
+    lst.assign(5, 10);
+    std::cout << "List after assign: ";
+    for (const auto& elem : lst) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    lst.push_front(5);
+    lst.push_back(20);
+    std::cout << "List after push_front and push_back: ";
+    for (const auto& elem : lst) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    lst.pop_front();
+    lst.pop_back();
+    std::cout << "List after pop_front and pop_back: ";
+    for (const auto& elem : lst) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    lst.insert(std::next(lst.begin(), 2), 15);
+    std::cout << "List after insert: ";
+    for (const auto& elem : lst) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    lst.erase(std::next(lst.begin(), 2));
+    std::cout << "List after erase: ";
+    for (const auto& elem : lst) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    lst.clear();
+    std::cout << "List size after clear: " << lst.size() << std::endl;
+
+    return 0;
+}
