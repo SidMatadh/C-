@@ -1,0 +1,48 @@
+#include <iostream>
+#include <map>
+
+int main() {
+    // Initialization
+    std::multimap<std::string, int> myMultimap = {{"Alice", 30}, {"Bob", 25}, {"Alice", 35}, {"Charlie", 30}};
+
+    // Iterators
+    std::cout << "Multimap elements:\n";
+    for (auto it = myMultimap.begin(); it != myMultimap.end(); ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+
+    // Capacity
+    std::cout << "Multimap size: " << myMultimap.size() << std::endl;
+    std::cout << "Is multimap empty? " << (myMultimap.empty() ? "Yes" : "No") << std::endl;
+
+    // Modifiers
+    myMultimap.insert({"David", 40});
+    myMultimap.erase(myMultimap.find("Alice")); // Erase one instance of 'Alice'
+    std::cout << "Multimap after insert and erase:\n";
+    for (const auto& pair : myMultimap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
+    // Lookup
+    auto count = myMultimap.count("Bob");
+    std::cout << "Count of 'Bob': " << count << std::endl;
+
+    auto search = myMultimap.find("Charlie");
+    if (search != myMultimap.end()) {
+        std::cout << "Found: " << search->first << " -> " << search->second << std::endl;
+    } else {
+        std::cout << "Not found" << std::endl;
+    }
+
+    auto range = myMultimap.equal_range("Alice");
+    std::cout << "Elements with key 'Alice':\n";
+    for (auto it = range.first; it != range.second; ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+
+    // Observers
+    auto comp = myMultimap.key_comp();
+    std::cout << "Comparison of 'Bob' and 'David': " << comp("Bob", "David") << std::endl;
+
+    return 0;
+}
