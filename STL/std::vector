@@ -1,27 +1,59 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 int main() {
-    std::vector<int> myVector = {1, 2, 3, 4, 5};
+    // Initialization
+    std::vector<int> vec = {1, 2, 3, 4, 5};
 
-    // Adding elements
-    myVector.push_back(6);
-    myVector.insert(myVector.begin() + 2, 10);
+    // Element access
+    std::cout << "Element at index 2: " << vec.at(2) << std::endl;
+    std::cout << "First element: " << vec.front() << std::endl;
+    std::cout << "Last element: " << vec.back() << std::endl;
+    std::cout << "Data pointer: " << vec.data() << std::endl;
 
-    // Removing elements
-    myVector.pop_back();
-    myVector.erase(myVector.begin() + 1);
-
-    // Iterating over elements
+    // Iterators
     std::cout << "Vector elements: ";
-    for (const auto& element : myVector) {
-        std::cout << element << " ";
+    for (auto it = vec.begin(); it != vec.end(); ++it) {
+        std::cout << *it << " ";
     }
     std::cout << std::endl;
 
-    // Capacity and size
-    std::cout << "Size: " << myVector.size() << std::endl;
-    std::cout << "Capacity: " << myVector.capacity() << std::endl;
+    // Capacity
+    std::cout << "Vector size: " << vec.size() << std::endl;
+    std::cout << "Vector max_size: " << vec.max_size() << std::endl;
+    std::cout << "Vector capacity: " << vec.capacity() << std::endl;
+    std::cout << "Is vector empty? " << (vec.empty() ? "Yes" : "No") << std::endl;
+
+    vec.reserve(10);
+    std::cout << "Vector capacity after reserve: " << vec.capacity() << std::endl;
+
+    // Modifiers
+    vec.assign(5, 10);
+    std::cout << "Vector after assign: ";
+    for (const auto& elem : vec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    vec.push_back(20);
+    vec.insert(vec.begin() + 2, 15);
+    std::cout << "Vector after push_back and insert: ";
+    for (const auto& elem : vec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    vec.pop_back();
+    vec.erase(vec.begin() + 1);
+    std::cout << "Vector after pop_back and erase: ";
+    for (const auto& elem : vec) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    vec.clear();
+    std::cout << "Vector size after clear: " << vec.size() << std::endl;
 
     return 0;
 }
