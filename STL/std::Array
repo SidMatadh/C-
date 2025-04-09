@@ -1,0 +1,46 @@
+#include <iostream>
+#include <array>
+#include <algorithm> // For std::sort
+#include <tuple>     // For std::get
+
+int main() {
+    // 1. Initialization
+    std::array<int, 5> myArray = {5, 3, 4, 1, 2};
+
+    // 2. Element Access
+    std::cout << "Element at index 2: " << myArray.at(2) << std::endl;
+    std::cout << "First element: " << myArray.front() << std::endl;
+    std::cout << "Last element: " << myArray.back() << std::endl;
+
+    // 3. Iterators
+    std::cout << "Array elements: ";
+    for (auto it = myArray.begin(); it != myArray.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    // 4. Capacity
+    std::cout << "Array size: " << myArray.size() << std::endl;
+    std::cout << "Is array empty? " << (myArray.empty() ? "Yes" : "No") << std::endl;
+
+    // 5. Modifiers
+    myArray.fill(10);
+    std::cout << "Array after fill: ";
+    for (const auto& elem : myArray) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    // Resetting array to original values
+    myArray = {5, 3, 4, 1, 2};
+
+    // 6. Operations
+    std::sort(myArray.begin(), myArray.end());
+    std::cout << "Sorted array: ";
+    for (const auto& elem : myArray) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
