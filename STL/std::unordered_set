@@ -1,0 +1,37 @@
+#include <iostream>
+#include <unordered_set>
+
+int main() {
+    // Initialization
+    std::unordered_set<int> mySet = {1, 2, 3, 4, 5};
+
+    // Iterators
+    std::cout << "Unordered set elements: ";
+    for (auto it = mySet.begin(); it != mySet.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    // Capacity
+    std::cout << "Unordered set size: " << mySet.size() << std::endl;
+    std::cout << "Is unordered set empty? " << (mySet.empty() ? "Yes" : "No") << std::endl;
+
+    // Modifiers
+    mySet.insert(6);
+    mySet.erase(2);
+    std::cout << "Unordered set after insert and erase: ";
+    for (const auto& elem : mySet) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    // Lookup
+    auto search = mySet.find(3);
+    if (search != mySet.end()) {
+        std::cout << "Found: " << *search << std::endl;
+    } else {
+        std::cout << "Not found" << std::endl;
+    }
+
+    return 0;
+}
