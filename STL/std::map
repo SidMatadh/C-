@@ -1,0 +1,50 @@
+#include <iostream>
+#include <map>
+
+int main() {
+    // Initialization
+    std::map<std::string, int> myMap = {{"Alice", 30}, {"Bob", 25}, {"Charlie", 35}};
+
+    // Iterators
+    std::cout << "Map elements:\n";
+    for (auto it = myMap.begin(); it != myMap.end(); ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+
+    // Capacity
+    std::cout << "Map size: " << myMap.size() << std::endl;
+    std::cout << "Is map empty? " << (myMap.empty() ? "Yes" : "No") << std::endl;
+
+    // Element access
+    std::cout << "Value associated with 'Bob': " << myMap.at("Bob") << std::endl;
+
+    // Modifiers
+    myMap.insert({"David", 40});
+    myMap.erase("Alice");
+    std::cout << "Map after insert and erase:\n";
+    for (const auto& pair : myMap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
+    // Lookup
+    auto search = myMap.find("Charlie");
+    if (search != myMap.end()) {
+        std::cout << "Found: " << search->first << " -> " << search->second << std::endl;
+    } else {
+        std::cout << "Not found" << std::endl;
+    }
+
+    // Observers
+    auto comp = myMap.key_comp();
+    std::cout << "Comparison of 'Bob' and 'David': " << comp("Bob", "David") << std::endl;
+
+    // Operations
+    std::map<std::string, int> anotherMap = {{"Eve", 28}, {"Frank", 33}};
+    myMap.swap(anotherMap);
+    std::cout << "Map after swap:\n";
+    for (const auto& pair : myMap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
+    return 0;
+}
