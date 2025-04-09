@@ -1,0 +1,38 @@
+#include <iostream>
+#include <unordered_map>
+
+int main() {
+    // Initialization
+    std::unordered_map<std::string, int> myMap = {{"Alice", 30}, {"Bob", 25}, {"Charlie", 35}};
+
+    // Iterators
+    std::cout << "Unordered map elements:\n";
+    for (auto it = myMap.begin(); it != myMap.end(); ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+
+    // Capacity
+    std::cout << "Unordered map size: " << myMap.size() << std::endl;
+    std::cout << "Is unordered map empty? " << (myMap.empty() ? "Yes" : "No") << std::endl;
+
+    // Element access
+    std::cout << "Value associated with 'Bob': " << myMap.at("Bob") << std::endl;
+
+    // Modifiers
+    myMap.insert({"David", 40});
+    myMap.erase("Alice");
+    std::cout << "Unordered map after insert and erase:\n";
+    for (const auto& pair : myMap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
+    // Lookup
+    auto search = myMap.find("Charlie");
+    if (search != myMap.end()) {
+        std::cout << "Found: " << search->first << " -> " << search->second << std::endl;
+    } else {
+        std::cout << "Not found" << std::endl;
+    }
+
+    return 0;
+}
