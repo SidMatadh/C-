@@ -1,0 +1,51 @@
+#include <iostream>
+#include <set>
+
+int main() {
+    // Initialization
+    std::multiset<int> myMultiset = {2, 3, 1, 4, 2, 5, 3};
+
+    // Iterators
+    std::cout << "Multiset elements: ";
+    for (auto it = myMultiset.begin(); it != myMultiset.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    // Capacity
+    std::cout << "Multiset size: " << myMultiset.size() << std::endl;
+    std::cout << "Is multiset empty? " << (myMultiset.empty() ? "Yes" : "No") << std::endl;
+
+    // Modifiers
+    myMultiset.insert(6);
+    myMultiset.erase(myMultiset.find(2)); // Erase one instance of '2'
+    std::cout << "Multiset after insert and erase: ";
+    for (const auto& elem : myMultiset) {
+        std::cout << elem << " ";
+    }
+    std::cout << std::endl;
+
+    // Lookup
+    auto count = myMultiset.count(3);
+    std::cout << "Count of '3': " << count << std::endl;
+
+    auto search = myMultiset.find(4);
+    if (search != myMultiset.end()) {
+        std::cout << "Found: " << *search << std::endl;
+    } else {
+        std::cout << "Not found" << std::endl;
+    }
+
+    auto range = myMultiset.equal_range(3);
+    std::cout << "Elements equal to '3': ";
+    for (auto it = range.first; it != range.second; ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+
+    // Observers
+    auto comp = myMultiset.key_comp();
+    std::cout << "Comparison of 2 and 3: " << comp(2, 3) << std::endl;
+
+    return 0;
+}
