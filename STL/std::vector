@@ -10,7 +10,7 @@ int main() {
     std::cout << "Element at index 2: " << vec.at(2) << std::endl;
     std::cout << "First element: " << vec.front() << std::endl;
     std::cout << "Last element: " << vec.back() << std::endl;
-
+    vec.insert(v.begin() + 2, 99);
     // Capacity
     std::cout << "Vector size: " << vec.size() << std::endl;
     std::cout << "Vector max_size: " << vec.max_size() << std::endl;
