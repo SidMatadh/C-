@@ -34,17 +34,5 @@ int main() {
         std::cout << "Not found" << std::endl;
     }
 
-    // Observers
-    auto comp = myMap.key_comp();
-    std::cout << "Comparison of 'Bob' and 'David': " << comp("Bob", "David") << std::endl;
-
-    // Operations
-    std::map<std::string, int> anotherMap = {{"Eve", 28}, {"Frank", 33}};
-    myMap.swap(anotherMap);
-    std::cout << "Map after swap:\n";
-    for (const auto& pair : myMap) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
-    }
-
     return 0;
 }
