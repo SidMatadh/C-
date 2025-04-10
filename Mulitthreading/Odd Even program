@@ -3,32 +3,49 @@
 #include <mutex>
 #include <condition_variable>
 
-std::mutex mu;
-std::condition_variable cond;
-int count = 1;
+using namespace std;
 
-void PrintOdd()
+mutex mtx;
+condition_variable cond;
+int count = 1;
+bool zero_turn = true;
+
+void Zero()
 {
-    for(; count < 10;)
+    while (count < 10)
     {
-        std::unique_lock<std::mutex> locker(mu);
-        cond.wait(locker,[](){ return (count%2 == 1); });
-        std::cout << "From Odd:    " << count << std::endl;
-        count++;
+        unique_lock<mutex> locker(mtx);
+        cond.wait(locker, [](){ return zero_turn; });
+        cout << "0 ";
+        zero_turn = false;
         locker.unlock();
         cond.notify_all();
     }
-
 }
 
-void PrintEven()
+void oddprint()
 {
-    for(; count < 10;)
+    while (count < 10)
     {
-        std::unique_lock<std::mutex> locker(mu);
-        cond.wait(locker,[](){ return (count%2 == 0); });
-        std::cout << "From Even: " << count << std::endl;
+        unique_lock<mutex> locker(mtx);
+        cond.wait(locker, [](){ return !zero_turn && (count % 2 == 1); });
+        cout << count << " ";
         count++;
+        zero_turn = true;
+        locker.unlock();
+        cond.notify_all();
+    }
+}
+
+void evenprint()
+{
+    while (count < 10)
+    {
+        unique_lock<mutex> locker(mtx);
+        cond.wait(locker, [](){ return !zero_turn && (count % 2 == 0); });
+        cout << count << " ";
+        count++;
+        zero_turn = true;
         locker.unlock();
         cond.notify_all();
     }
@@ -36,8 +53,10 @@ void PrintEven()
 
 int main()
 {
-    std::thread t1(PrintOdd);
-    std::thread t2(PrintEven);
+    thread t0(Zero);
+    thread t1(oddprint);
+    thread t2(evenprint);
+    t0.join();
     t1.join();
     t2.join();
     return 0;
