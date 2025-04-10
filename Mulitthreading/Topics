@@ -7,7 +7,6 @@ Multithreading problems like Producer-consumer problem, Dining philosopher probl
 IPC mechanism
 Detect critical section in a program
 Thread design patterns like thread pool, producer consumer pattern.
-Abstract data structures: priority queue and deques
 Memory model
 ThreadSanitizer
 Odd-even program
