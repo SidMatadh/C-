@@ -1,55 +1,57 @@
-Imagine five philosophers sitting around a circular dining table. In front of each philosopher is a plate of spaghetti, and between each pair of philosophers is a single fork. To eat, a philosopher needs to use the two forks adjacent to their plate. The challenge is to design a protocol that ensures:
-
-
-No two philosophers can use the same fork at the same time.
-Philosophers don't starve (i.e., they eventually get to eat).
-The system avoids deadlock, where all philosophers are waiting indefinitely to pick up a fork.
-
 #include <iostream>
 #include <thread>
 #include <mutex>
-#include <vector>
 #include <chrono>
 
-class DiningPhilosophers {
-public:
-    DiningPhilosophers(int n) : forks(n) {}
+#define N 5
+using namespace std;
 
-    void dine(int p) {
-        while (true) {
-            think(p);
-            eat(p);
-        }
-    }
+mutex mtx[N];
 
-private:
-    std::vector<std::mutex> forks;
+void dine(int id)
+{
+    int left = id;
+    int right = (id + 1) % N;
 
-    void think(int p) {
-        std::cout << "Philosopher " << p << " is thinking.\n";
+    for (int i = 0; i < 3; i++)
+    {
+        std::cout << "Philosopher " << id << " is thinking\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
 
-    void eat(int p) {
-        int left = p, right = (p + 1) % forks.size();
-        std::lock(forks[left], forks[right]);
-        std::lock_guard<std::mutex> lLock(forks[left], std::adopt_lock);
-        std::lock_guard<std::mutex> rLock(forks[right], std::adopt_lock);
-        std::cout << "Philosopher " << p << " is eating.\n";
+        // Lock in consistent order to avoid deadlock
+        if (left < right) {
+            mtx[left].lock();
+            mtx[right].lock();
+        } else {
+            mtx[right].lock();
+            mtx[left].lock();
+        }
+
+        std::cout << "Philosopher " << id << " is eating\n";
+        
+        // Unlock both forks
+        mtx[left].unlock();
+        mtx[right].unlock();
         std::this_thread::sleep_for(std::chrono::milliseconds(150));
+
     }
-};
 
-int main() {
-    const int n = 5;
-    DiningPhilosophers dp(n);
-    std::vector<std::thread> threads;
+    cout << "Philosopher " << id << " done eating\n";
+}
 
-    for (int i = 0; i < n; ++i)
-        threads.push_back(std::thread(&DiningPhilosophers::dine, &dp, i));
+int main()
+{
+    thread philosopher[N];
 
-    for (auto& t : threads)
-        t.join();
+    for (int i = 0; i < N; i++)
+    {
+        philosopher[i] = thread(dine, i);
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        philosopher[i].join();
+    }
 
     return 0;
 }
