@@ -1,0 +1,34 @@
+Enforcing
+Permissive
+Disable
+
+Commands
+sestatus -> selinux status(enabled/Disabled) , Mode etc
+getenforce
+
+
+/etc/selinux/config
+SELINUX=enforcing
+
+fixfiles -F onboot -> creates ./autorelabel -> relabling to avoid crash etc)
+
+usr:role:type:label
+
+ls -lZ to list SELinux context info, security context
+
+ps -axZ | grep httpd
+
+systemctl status httpd
+
+netstat -taZ -> display label, IPV6
+
+journalctl -b 0 -> SELinux is preventing httpd from getter access, if you want to fix the label, if we move
+
+restorecon -v path (Restore label)
+
+chcon -t type filename -> change context //temp
+semanage fcontext -a -t //permanent
+
+/etc/SELinux/targeted/contexts/files/file_contexts
+
+getsebool -a
