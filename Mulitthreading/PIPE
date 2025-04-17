@@ -1,0 +1,26 @@
+int main() {
+   int pidfd[2];
+   mkfifo(name, 777); //named pipe
+   
+   pid_t pid = fork();
+   
+   if(pid == 0)
+   {
+       close(pidfd[0]);
+       open(name, o_wronly); //named pipe
+       
+       const char *abc = "Hello";
+       write(pidfd[1], abc, strlen(abc));
+       close(pidfd[1]);
+   }
+   else
+   {
+       close(pidfd[1]);
+       open(name, o_rdonly); //named pipe
+       //const char *abc = "Hello";
+       char buffer[1024];
+       read(pidfd[0], buffer, sizeof(buffer));
+       close(pidfd[1]);
+   }
+    return 0;
+}
