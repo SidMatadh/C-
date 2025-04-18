@@ -1,0 +1,32 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+bool canRearrange(char s[]) {
+    int maxfre = 0;
+    int word[256] = {0};
+    
+    for (int i = 0; i < strlen(s); i++) {
+        word[s[i]]++;
+        if (word[s[i]] > maxfre)
+            maxfre = word[s[i]];
+    }
+
+    if (maxfre > (strlen(s) + 1) / 2) {
+        return false;
+    }
+    
+    return true;
+}
+
+int main() {
+    char str[] = "abcdaaa";
+    
+    // Check if rearrangement is possible
+    if (canRearrange(str))
+        cout << "Yes, unique arrangement possible (no adjacent duplicates)" << endl;
+    else
+        cout << "No, cannot rearrange without adjacent duplicates" << endl;
+
+    return 0;
+}
