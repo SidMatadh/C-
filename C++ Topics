@@ -1,5 +1,4 @@
 Compile generates a so file along with .o and .d
-C++ Topics
 - C vs C++
 https://www.geeksforgeeks.org/difference-between-c-and-c/
 - Empty class [one byte to make them distinguishable.]
@@ -15,7 +14,6 @@ public:
 };
 - Structure in C vs C++
 - Memory management in C vs C++
-- Memory management in C++
 If i allocate using malloc can we delocate using delete
 - Class vs Structure
 - New vs Malloc
@@ -32,7 +30,6 @@ If i allocate using malloc can we delocate using delete
 - Virtual function and pure virtual function
 - Virtual function without inheritence - is it possible?
 - function pointer
-Done
 - Friend Class and Function
 - Constructor and types
 Why pass by refernce in copy and pass by value, what happens if we pass by value
