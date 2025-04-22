@@ -1,14 +1,18 @@
-Enforcing
-Permissive
-Disable
+SELinux (Security-Enhanced Linux) integrated into the Linux kernel that provides access control, including mandatory access controls (MAC).
+SELinux controls which processes can access which files, ports, and other resources
+
+Modes of SELinux
+Enforcing – SELinux enforces policies (blocks and logs).
+Permissive – SELinux only logs violations, doesn’t block.
+Disabled – SELinux is completely turned off.
 
 Commands
 sestatus -> selinux status(enabled/Disabled) , Mode etc
 getenforce
-
+setenforce 1 -> temp
 
 /etc/selinux/config
-SELINUX=enforcing
+SELINUX=enforcing -> Permanent
 
 fixfiles -F onboot -> creates ./autorelabel -> relabling to avoid crash etc)
 
@@ -21,6 +25,9 @@ ps -axZ | grep httpd
 systemctl status httpd
 
 netstat -taZ -> display label, IPV6
+
+For SELinux logs, I primarily check /var/log/audit/audit.log
+If the audit daemon (auditd) isn’t running, I check /var/log/messages or use journalctl,
 
 journalctl -b 0 -> SELinux is preventing httpd from getter access, if you want to fix the label, if we move
 
