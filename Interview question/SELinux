@@ -34,7 +34,7 @@ journalctl -b 0 -> SELinux is preventing httpd from getter access, if you want t
 restorecon -v path (Restore label)
 
 chcon -t type filename -> change context //temp
-semanage fcontext -a -t //permanent
+semanage fcontext -a -t type file //permanent
 
 /etc/SELinux/targeted/contexts/files/file_contexts
 
