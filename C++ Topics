@@ -1,8 +1,3 @@
-C++
-Multithreading
-STL
-- Morning - Networking concepts
-
 Compile generates a so file along with .o and .d
 C++ Topics
 - C vs C++
@@ -60,5 +55,3 @@ https://smartbear.com/blog/the-biggest-changes-in-c11-and-why-you-should-care/
 - Class A has 2 functions F1 and F2, F2 is virtual and inside F1 func body we are calling F2. We have created base class pointer which is pointing
 to derived class B, we are overiding F2
 - Smart pointers and types
-
-STL
