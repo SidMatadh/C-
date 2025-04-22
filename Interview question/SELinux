@@ -20,6 +20,8 @@ usr:role:type:label
 
 ls -lZ to list SELinux context info, security context
 
+find . -type f -iname "*.cpp" -exec ls -l {}/;
+
 ps -axZ | grep httpd
 
 systemctl status httpd
