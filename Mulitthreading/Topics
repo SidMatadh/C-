@@ -10,3 +10,6 @@ Thread design patterns like thread pool, producer consumer pattern.
 Memory model
 ThreadSanitizer
 Odd-even program
+
+We use an internal performance tool called Quadsec, which is Dockerized and interacts with our API 
+(hosted via Swagger) to simulate concurrent requests — like load testing 1000 requests at a time.
