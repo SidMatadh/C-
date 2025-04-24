@@ -1,26 +1,32 @@
+#include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <cstring>
+
+using namespace std;
+
 int main() {
-   int pidfd[2];
-   mkfifo(name, 777); //named pipe
-   
-   pid_t pid = fork();
-   
-   if(pid == 0)
-   {
-       close(pidfd[0]);
-       open(name, o_wronly); //named pipe
-       
-       const char *abc = "Hello";
-       write(pidfd[1], abc, strlen(abc));
-       close(pidfd[1]);
-   }
-   else
-   {
-       close(pidfd[1]);
-       open(name, o_rdonly); //named pipe
-       //const char *abc = "Hello";
-       char buffer[1024];
-       read(pidfd[0], buffer, sizeof(buffer));
-       close(pidfd[1]);
-   }
+    const char* name = "/tmp/myfifo";
+    mkfifo(name, 0666); // Create named pipe with read/write permissions
+
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        // Child process - Writer
+        int fd = open(name, O_WRONLY);
+        const char* msg = "Hello from child";
+        write(fd, msg, strlen(msg));
+        close(fd);
+    } else {
+        // Parent process - Reader
+        char buffer[1024] = {0};
+        int fd = open(name, O_RDONLY);
+        read(fd, buffer, sizeof(buffer));
+        cout << "Parent received: " << buffer << endl;
+        close(fd);
+    }
+
     return 0;
 }
