@@ -1,0 +1,22 @@
+#String 
+
+"""
+methods
+endswith
+replace
+find
+count
+Capitalize
+"""
+
+str = "Hello Bangalore peeps"
+
+endswithstr = str.endswith("re")
+
+replacedword = str.replace("peeps", "peoples")
+
+findstr = str.find("ore")
+
+countstr = str.count("o")
+
+print(endswithstr, replacedword, findstr, countstr)
