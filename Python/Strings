@@ -1,6 +1,11 @@
 #String 
 
 """
+Immutable: can’t modify in place.
+Ordered: supports indexing & slicing.
+Iterable: can loop through characters.
+Supports all common sequence operations (in, +, *, slicing).
+
 methods
 endswith
 replace
