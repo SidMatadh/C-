@@ -1,4 +1,10 @@
-#list
+"""
+list
+Mutable - can be changed in place.
+Heterogeneous - can store mixed data types (int, str, float, objects, even other lists).
+Ordered - maintains insertion order.
+Indexable & Slicable - access elements or ranges with [ ] and slices.
+"""
 
 mylist = [1,2,3,4,5]
 
@@ -17,3 +23,17 @@ mylist.reverse()
 mylist.insert(1,30)
 
 print("5.",mylist)
+
+
+mylist.extend([7, 8, 9])  # add multiple items at the end
+mylist += [10, 11]        # same as extend
+
+mylist.remove(30)    # remove first occurrence of 30
+mylist.pop()         # removes last element, returns it
+mylist.pop(2)        # removes element at index 2
+del mylist[0]        # delete element at index 0
+
+copy_list = mylist.copy()  # shallow copy
+mylist.clear()             # remove all items
+
+print(nums[::2]) 
