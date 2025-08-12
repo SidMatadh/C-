@@ -1,0 +1,7 @@
+Tuple 
+
+Immutable → once created, you cannot change, add, or remove elements.
+Ordered → elements maintain their position.
+Can contain mixed types (ints, strings, lists, etc.).
+Hashable → can be used as dictionary keys if all elements inside are hashable.
+Faster than lists for iteration and storage (because they’re immutable).
