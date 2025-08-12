@@ -1,0 +1,19 @@
+#list
+
+mylist = [1,2,3,4,5]
+
+mylist.sort()
+print("1.",mylist)
+new_sorted = sorted(mylist);
+print("2.",new_sorted)
+mylist.sort(reverse=True)
+print("3.",mylist)
+
+reverse_sorted = sorted(mylist, reverse=True)
+print("4.",mylist)
+
+mylist.append(6)
+mylist.reverse()
+mylist.insert(1,30)
+
+print("5.",mylist)
