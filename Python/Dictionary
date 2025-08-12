@@ -1,0 +1,29 @@
+#Dictionary
+"""
+Mutable → can be changed after creation.
+Unordered (before Python 3.7), insertion ordered (Python 3.7+).
+Key–Value pairs: {key: value} format.
+Keys must be immutable & hashable → str, int, float, tuple (if tuple elements are immutable), but not list or dict.
+Values can be any type, even lists or other dictionaries.
+
+"""
+
+CreateDict = {
+    "name" : "test",
+    "Age" : 10,
+    "Listme" : [1,2,3,4,5],
+    "tupleme" : (6,7,8,9,10),
+    "miniDict" : {
+        "type" : "mini"
+    }
+}
+
+CreateDict["name"] = "test1"
+print(CreateDict["name"]) //returns error
+print(CreateDict["miniDict"]["type"])
+
+print(CreateDict.keys()) #all keys
+print(list(CreateDict.keys())) #all keys in list
+print(CreateDict.values()) #all values
+print(CreateDict.items()) #key values
+print(CreateDict.get("name"))  #returns None if not found
