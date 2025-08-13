@@ -1,0 +1,17 @@
+import copy
+
+# Original list with nested lists
+original = [[1, 2], [3, 4]]
+
+# Shallow copy
+shallow = original.copy()
+
+# Deep copy
+deep = copy.deepcopy(original)
+
+# Modify nested list in original
+original[0][0] = 999
+
+print("Original:", original)
+print("Shallow:", shallow)  # Shares inner lists
+print("Deep   :", deep)     # Fully independent
