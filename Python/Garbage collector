@@ -1,0 +1,32 @@
+GC’s cycle detector runs only for objects that can form reference cycles (lists, dicts, sets, custom classes, etc.).Objects freed immediately by reference counting never even hit GC.  
+
+Generation 0
+All new GC-tracked objects start in G0.
+
+When:
+allocations - deallocations > 700   # default threshold
+→ GC collects G0.
+
+Survivors (still reachable) are promoted to G1.
+
+Generation 1
+G1 collection runs after 10 G0 collections (default).
+
+When G1 runs, both G0 and G1 are collected.
+Survivors in G1 get promoted to G2.
+
+Generation 2
+G2 collection runs after 10 G1 collections (default).
+When G2 runs, it collects G0, G1, and G2.
+
+G2 survivors stay in G2 (they don’t go anywhere else — it’s the oldest generation).
+
+[allocations - deallocations > 700] → G0 run → survivors → G1
+[10 × G0 runs] → G1 run (also runs G0) → survivors → G2
+[10 × G1 runs] → G2 run (also runs G1 & G0)
+
+📌 Key points:
+The 700, 10, 10 values are default thresholds — they can be changed with gc.set_threshold().
+Manual gc.collect() ignores thresholds and runs all generations immediately.
+This whole promotion logic exists because most objects die young — scanning old ones less often is faster.
+
