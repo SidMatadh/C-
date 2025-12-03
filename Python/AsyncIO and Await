@@ -37,6 +37,27 @@ Three ways to call async function
         print(result)
       asyncio.run(main())
 
+  4. event loop rules
+     What happens if you call asyncio.run() multiple times
+     import asyncio
+
+     async def say_hello():
+        print("Hello...")
+        await asyncio.sleep(1)
+        print("...world!")
+
+     async def say_hi():
+        print("Hi there!")
+        await asyncio.sleep(1)
+        print("Bye!")
+    # Calling separately
+    asyncio.run(say_hello())
+    asyncio.run(say_hi())
+##
+calling asyncio.run() multiple times will raise an error (RuntimeError: asyncio.run() cannot be called from a running event loop).
+That’s why people often wrap everything in a single main() coroutine and call asyncio.run(main()) once. It avoids juggling multiple loops.
+
+
 Note:
   async:
     Calling them directly just gives you a coroutine object
