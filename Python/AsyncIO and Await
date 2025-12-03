@@ -1,0 +1,43 @@
+AsyncIO and Await
+
+Coroutine Object: 
+  A coroutine object is what you get when you call an async def function.
+  It represents the future execution of that function.
+  To make it actually run, you must either await it or schedule it in an event loop (asyncio.run)
+
+async without await
+
+  import asyncio
+  async def say_hello():
+      print("Hello, world!")
+  # Call the coroutine
+  result = say_hello()
+  print(result)
+
+  O/P
+  <coroutine object say_hello at 0x...>
+
+  say_hello() is defined as async, so calling it does not run the function immediately.
+  Instead, it returns a coroutine object.
+
+Three ways to call async function
+  1. Using await inside another coroutine
+       async def main():
+         result = await fetch_data()
+         print(result)
+       asyncio.run(main())
+
+  2. Using asyncio.run() at the top level
+       asyncio.run(fetch_data())
+
+  3. Scheduling with asyncio.create_task() or loop.create_task()
+      async def main():
+        task = asyncio.create_task(fetch_data())
+        result = await task
+        print(result)
+      asyncio.run(main())
+
+Note:
+  async:
+    Calling them directly just gives you a coroutine object
+    To actually execute them, you need await, asyncio.run, or task scheduling
